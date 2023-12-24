@@ -88,6 +88,11 @@
                             <input type="text" class="form-control" id="address" name="address"
                                    placeholder="{{$users->address}}" value="{{$users->address}}">
                         </div>
+                        <div class="form-group">
+                            <label for="country">کشور</label>
+                            <input type="country" class="form-control" id="country" name="country"
+                                   placeholder="{{$users->country}}" value="{{$users->country}}">
+                        </div>
 
                     </div>
                     <!-- /.card-body -->

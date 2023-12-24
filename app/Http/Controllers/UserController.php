@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 class UserController extends Controller
 {
     public function create()
@@ -10,36 +11,18 @@ class UserController extends Controller
     }
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = User::all();
         return view('users.userData', ['users' => $users]);
     }
     public function edit($id)
     {
-        $users =DB::table('users')->where('id',$id)->first();
+        $users = User::find($id);
         return view('users.editUser', ['users' => $users]);
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-
-        $request->validate([
-            'user_name'=>'required',
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'age'=>'required',
-            'gender'=>'required',
-            'email'=>'required',
-            'phone_number'=>'required',
-            'address'=>'required',
-            'postal_code'=>'required',
-            'country'=>'required',
-            'province'=>'required',
-            'city'=>'required',
-
-        ]);
-
-
-        DB::table('users')->insert([
+        User::create([
             'user_name'=>$request->user_name,
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
@@ -53,15 +36,12 @@ class UserController extends Controller
             'country'=>$request->country,
             'province'=>$request->province,
             'city'=>$request->city,
-            'created_at'=>date('Y-m-d H:i:s'),
         ]);
-
-
         return redirect()->route('users.index');
     }
-    public function update(Request $request,$id )
+    public function update(UpdateUserRequest $request,$id )
     {
-        DB::table('users')->where('id' ,$id)->update([
+        User::find($id)->update([
             'user_name'=>$request->user_name,
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
@@ -71,13 +51,17 @@ class UserController extends Controller
             'phone_number'=>$request->phone_number,
             'address'=>$request->address,
             'post_code'=>$request->postal_code,
-            'updated_at'=>date('Y-m-d H:i:s'),
+            'country'=>$request->country,
         ]);
         return redirect('/users');
     }
     public function destroy($id)
     {
-        DB::table('users')->where('id' , $id)->update(['status' => 'disable']);
+        User::destroy($id);
         return redirect('/users');
+    }
+    public function show() {
+        $activeUserCounts = User::all();
+        return view('workplace', compact('activeUserCounts'));
     }
 }

@@ -33,9 +33,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{--<div class="card-header">
+                        <div class="card-header">
                             <h3 class="card-title"></h3>
-                        </div>--}}
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="container">
@@ -49,12 +49,12 @@
                                         <th>قیمت کل</th>
                                         <th>ویرایش</th>
                                         <th>حذف</th>
+                                        <th>صدور فاکتور</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @php($temp = 0)
                                     @foreach ($orders as $order)
-                                        @if($order->status == 'enable')
                                         <tr>
                                             <td>{{$order->id}}</td>
                                             <td>{{$order->title}}</td>
@@ -69,8 +69,9 @@
                                                     <div class="card-body">
                                                         <table>
                                                             <tr>
-                                                                <th>{{$order->user_name}} {{$order->last_name}}</th>
-                                                                <th>{{$order->email}}</th>
+                                                                <th>{{$order->user->user_name}}
+                                                                    {{$order->user->last_name}}</th>
+                                                                <th>{{$order->user->email}}</th>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -85,10 +86,11 @@
                                                      data-bs-parent="#accordion">
                                                     <div class="card-body">
                                                         <table>
-                                                            @foreach($products as $product)
+                                                            @foreach($order->products as $product)
                                                                 <tr>
-                                                                    <td>name : {{$product->title}}</td>
+                                                                    <td>name : {{$product->product_name}}</td>
                                                                     <td>price : {{$product->price}}</td>
+                                                                    <td>count : {{$product->pivot->count}}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </table>
@@ -113,22 +115,29 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            <td>
+                                                <form class="" action="{{route('factors.create',['id'=>$order->id])}}"
+                                                      method="get">
+                                                    <button type="submit">
+                                                        <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                        @endif
                                     @endforeach
                                     </tbody>
-                                    {{--<tfoot>
+                                    <tfoot>
                                     <tr>
                                         <th>مشتری</th>
                                         <th>فروشنده</th>
                                         <th>توضیحات</th>
                                         <th>لیست محصولات</th>
                                         <th>قیمت کل</th>
-                                        <th>بدهی</th>
                                         <th>ویرایش</th>
                                         <th>حذف</th>
+                                        <th>صدور فاکتور</th>
                                     </tr>
-                                    </tfoot>--}}
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>

@@ -364,7 +364,7 @@
 			//http://scaledinnovation.com/analytics/splines/aboutSplines.html
 			var d01=Math.sqrt(Math.pow(MiddlePoint.x-FirstPoint.x,2)+Math.pow(MiddlePoint.y-FirstPoint.y,2)),
 				d12=Math.sqrt(Math.pow(AfterPoint.x-MiddlePoint.x,2)+Math.pow(AfterPoint.y-MiddlePoint.y,2)),
-				fa=t*d01/(d01+d12),// scaling factor for triangle Ta
+				fa=t*d01/(d01+d12),// scaling factors for triangle Ta
 				fb=t*d12/(d01+d12);
 			return {
 				inner : {
@@ -3079,7 +3079,7 @@
 			helpers.each(this.segments,function(segment){
 				segment.save();
 			});
-			
+
 			this.reflow();
 			this.render();
 		},

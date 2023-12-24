@@ -53,8 +53,7 @@
                                 <tbody>
                                 @php($temp = 0)
                                 @foreach ($products as $product)
-                                    @if($product->status == 'enable')
-                                    <tr>
+                                        <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->description }}</td>
@@ -78,7 +77,6 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    @endif
                                 @endforeach
                                 </tbody>
                                 <tfoot>

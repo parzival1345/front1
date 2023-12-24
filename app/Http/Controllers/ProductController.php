@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -14,47 +15,45 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = DB::table('products')->get();
+        $products = Product::all();
         return view('products.productsData' , ['products' => $products]);
     }
     public function edit($id)
     {
-        $products =DB::table('products')->where('id',$id)->first();
+        $products =  Product::find($id);
         return view('products.editProductMenue', ['products' => $products]);
     }
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-//        $request->validate([
-//            'title'=>'required',
-//            'price'=>'required',
-//            'inventory'=>'required',
-//            'description'=>'required',
-//        ]);
-
-        DB::table('products')->insert([
+        Product::create([
             'title'=>$request->product_name,
             'price'=>$request->price,
             'inventory'=>$request->amount_available,
             'description'=>$request->explanation,
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
-        return redirect()->route('products.index');
+        return redirect('/products');
     }
-    public function update(Request $request,$id )
+
+    public function update(UpdateProductRequest $request,$id )
     {
-        DB::table('products')->where('id' ,$id)->update([
+        Product::find($id)->update([
             'title'=>$request->product_name,
             'price'=>$request->price,
             'inventory'=>$request->amount_available,
             'description'=>$request->explanation,
-            'update_at'=>date('Y-m-d H:i:s'),
         ]);
         return redirect('/products');
     }
     public function destroy($id)
     {
-        DB::table('products')->where('id' , $id)->update(['status' => 'disable']);
+        Product::destroy($id);
         return redirect('/products');
+    }
+
+    public function show() {
+        $product_count = Product::count();
+        return view('workplace', ['product_count' => $product_count]);
     }
 }
 

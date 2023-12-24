@@ -1444,11 +1444,11 @@ for (var func in conversions) {
   // export rgb2hsl and ["rgb"]["hsl"]
   convert[from] = convert[from] || {};
 
-  convert[from][to] = convert[func] = (function(func) { 
+  convert[from][to] = convert[func] = (function(func) {
     return function(arg) {
       if (typeof arg == "number")
         arg = Array.prototype.slice.call(arguments);
-      
+
       var val = conversions[func](arg);
       if (typeof val == "string" || val === undefined)
         return val; // keyword
@@ -1476,12 +1476,12 @@ Converter.prototype.routeSpace = function(space, args) {
    }
    // color.rgb(10, 10, 10)
    if (typeof values == "number") {
-      values = Array.prototype.slice.call(args);        
+      values = Array.prototype.slice.call(args);
    }
 
    return this.setValues(space, values);
 };
-  
+
 /* Set the values for a space, invalidating cache */
 Converter.prototype.setValues = function(space, values) {
    this.space = space;
@@ -5268,7 +5268,7 @@ module.exports = function(Chart) {
 		s01 = isNaN(s01) ? 0 : s01;
 		s12 = isNaN(s12) ? 0 : s12;
 
-		var fa = t * s01; // scaling factor for triangle Ta
+		var fa = t * s01; // scaling factors for triangle Ta
 		var fb = t * s12;
 
 		return {
@@ -7332,7 +7332,7 @@ module.exports = function(Chart) {
 					}
 				} else {
 					// A vertical axis is more constrained by the width. Labels are the
-					// dominant factor here, so get that length first and account for padding
+					// dominant factors here, so get that length first and account for padding
 					if (tickOpts.mirror) {
 						largestTextWidth = 0;
 					} else {
@@ -12420,7 +12420,7 @@ module.exports = function(Chart) {
 			if (me.isHorizontal()) {
 				maxTicks = Math.min(tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11, Math.ceil(me.width / 50));
 			} else {
-				// The factor of 2 used to scale the font size has been experimentally determined.
+				// The factors of 2 used to scale the font size has been experimentally determined.
 				var tickFontSize = helpers.valueOrDefault(tickOpts.fontSize, defaults.global.defaultFontSize);
 				maxTicks = Math.min(tickOpts.maxTicksLimit ? tickOpts.maxTicksLimit : 11, Math.ceil(me.height / (2 * tickFontSize)));
 			}

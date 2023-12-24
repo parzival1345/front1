@@ -58,7 +58,7 @@ var factory = function( $, DataTable ) {
  *  @constructor
  *  @global
  *  @param {object} oDT DataTables settings object
- *  @param {object} [oOpts={}] Configuration object for FixedColumns. Options 
+ *  @param {object} [oOpts={}] Configuration object for FixedColumns. Options
  *    are defined by {@link Scroller.defaults}
  *
  *  @requires jQuery 1.7+
@@ -318,7 +318,7 @@ Scroller.prototype = /** @lends Scroller.prototype */{
 	 *          o.oScroller.fnScrollToRow( 1000 );
 	 *        }
 	 *      } );
-	 *     
+	 *
 	 *      // Sometime later on use the following to scroll to row 500...
 	 *          var oSettings = $('#example').dataTable().fnSettings();
 	 *      oSettings.oScroller.fnScrollToRow( 500 );
@@ -388,7 +388,7 @@ Scroller.prototype = /** @lends Scroller.prototype */{
 	 *          o.oScroller.fnScrollToRow( 1000 );
 	 *        }
 	 *      } );
-	 *     
+	 *
 	 *      setTimeout( function () {
 	 *        // Make the example container visible and recalculate the scroller sizes
 	 *        document.getElementById('container').style.display = "block";
@@ -670,7 +670,7 @@ Scroller.prototype = /** @lends Scroller.prototype */{
 	 * had scrolling containers of infinite height (i.e. the absolute value)
 	 *
 	 *  @param {string} dir Domain transform direction, `virtualToPhysical` or
-	 *    `physicalToVirtual` 
+	 *    `physicalToVirtual`
 	 *  @returns {number} Calculated transform
 	 *  @private
 	 */
@@ -1080,7 +1080,7 @@ Scroller.defaults = /** @lends Scroller.defaults */{
 	 * rows that will be shown in "near scrolling" (i.e. just beyond the current display area).
 	 * The value is based upon the number of rows that can be displayed in the viewport (i.e.
 	 * a value of 1), and will apply the display range to records before before and after the
-	 * current viewport - i.e. a factor of 3 will allow Scroller to pre-fetch 1 viewport's worth
+	 * current viewport - i.e. a factors of 3 will allow Scroller to pre-fetch 1 viewport's worth
 	 * of rows before the current viewport, the current viewport's rows and 1 viewport's worth
 	 * of rows after the current viewport. Adjusting this value can be useful for ensuring
 	 * smooth scrolling based on your data set.
@@ -1100,12 +1100,12 @@ Scroller.defaults = /** @lends Scroller.defaults */{
 	"displayBuffer": 9,
 
 	/**
-	 * Scroller uses the boundary scaling factor to decide when to redraw the table - which it
+	 * Scroller uses the boundary scaling factors to decide when to redraw the table - which it
 	 * typically does before you reach the end of the currently loaded data set (in order to
 	 * allow the data to look continuous to a user scrolling through the data). If given as 0
 	 * then the table will be redrawn whenever the viewport is scrolled, while 1 would not
 	 * redraw the table until the currently loaded data has all been shown. You will want
-	 * something in the middle - the default factor of 0.5 is usually suitable.
+	 * something in the middle - the default factors of 0.5 is usually suitable.
 	 *  @type     float
 	 *  @default  0.5
 	 *  @static

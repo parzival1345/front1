@@ -384,15 +384,12 @@
                                     <th>آدرس</th>
                                     <th>شماره همراه</th>
                                     <th>کشور</th>
-                                    <th>استان</th>
-                                    <th>شهر</th>
                                     <th>ویرایش</th>
                                     <th>حذف</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($users as $user)
-                                    @if($user->status == 'enable') {
                                     <tr>
                                         <td>{{ $user->user_name }}</td>
                                         <td>{{ $user->email}}</td>
@@ -401,8 +398,6 @@
                                         <td>{{ $user->address }}</td>
                                         <td>{{ $user->phone_number }}</td>
                                         <td>{{ $user->country }}</td>
-                                        <td>{{ $user->province }}</td>
-                                        <td>{{ $user->city }}</td>
                                         <td>
                                             <form class="" action="{{route('users.edit',['id'=>$user->id])}}"
                                                   method="get">
@@ -422,7 +417,6 @@
                                         </td>
                                     </tr>
                                     }
-                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>

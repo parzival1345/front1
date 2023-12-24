@@ -11249,7 +11249,7 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 		el.to = o.to || ( mode === "hide" ? zero : original );
 	}
 
-	// Set scaling factor
+	// Set scaling factors
 	factor = {
 		from: {
 			y: el.from.height / original.height,

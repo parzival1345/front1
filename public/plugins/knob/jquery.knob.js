@@ -74,7 +74,7 @@
         this.cH = null; // change hook
         this.eH = null; // cancel hook
         this.rH = null; // release hook
-        this.scale = 1; // scale factor
+        this.scale = 1; // scale factors
         this.relative = false;
         this.relativeWidth = false;
         this.relativeHeight = false;

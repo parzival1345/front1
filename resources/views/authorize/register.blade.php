@@ -18,22 +18,22 @@
         <div class="card-body register-card-body">
             <p class="login-box-msg">ثبت نام کاربر جدید</p>
 
-            <form action="{{route('register')}}" method="post">
+            <form action="{{route('createUser')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="نام و نام خانوادگی">
+                    <input name="name" type="text" class="form-control" placeholder="نام">
                     <div class="input-group-append">
                         <span class="fa fa-user input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="ایمیل">
+                    <input name = 'email' type="email" class="form-control" placeholder="ایمیل">
                     <div class="input-group-append">
                         <span class="fa fa-envelope input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="رمز عبور">
+                    <input name="password" type="password" class="form-control" placeholder="رمز عبور">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa-solid fa-fingerprint"></i>
@@ -76,7 +76,7 @@
                 </a>
             </div>
 
-            <a href="{{route('login')}}" class="text-center">من قبلا ثبت نام کرده ام</a>
+            <a href="{{route('loginUser')}}" class="text-center">من قبلا ثبت نام کرده ام</a>
         </div>
         <!-- /.form-box -->
     </div><!-- /.card -->

@@ -46,11 +46,9 @@
                         <label for="customer_id">customers</label>
                         <select class="form-control" id="user_id" name="user_id">
                         @foreach($users as $user)
-                                @if($user->status == 'enable')
                                 <option value="{{$user->id}}">
-                                    username: {{$user->last_name}}
+                                    username: {{$user->user_name}}
                                 </option>
-                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -80,7 +78,6 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($products_available as $product)
-                                                    @if($product->status == 'enable')
                                                     <tr>
                                                         <td>{{$product->title}}</td>
                                                         <td>{{$product->price}}</td>
@@ -103,7 +100,6 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @endif
                                                 @endforeach
                                                 </tbody>
                                             </table>

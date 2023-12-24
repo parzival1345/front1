@@ -2,131 +2,168 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Order;
+use App\Models\Order_product;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+use function PHPUnit\Framework\isNull;
+
 class OrderController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $orders = DB::table('users')
-            ->join('orders','users.id','=','orders.user_id')->get();
-        $products = DB::table('products')->get();
-        $order_products = DB::table('order_products')->get();
-        return view('orders.ordersData', ['orders' => $orders,'products' => $products,'order_products'=>$order_products]);
-
+        $orders = Order::with('products')->with('user')->get();
+        return view('orders.ordersData', ['orders' => $orders]);
     }
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $users = DB::table('users')->get();
-        $products_available = DB::table('products')->get();
-    return view('orders.addOrder',['users' => $users, 'products_available' => $products_available]);
+        $users = User::all();
+        $products_available = Product::all();
+        return view('orders.addOrder', ['users' => $users, 'products_available' => $products_available]);
     }
-    public function store(Request $request)
-    {
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreOrderRequest $request)
+    {
+        //گام اول : محسابه قیمت نهایی
         $total_price = 0;
 
-        foreach ($request->all() as $key => $product_count) {
-
-            if (Str::is('Product*', $key)) {
-                for ($i = 0; $i < $product_count; $i += 1) {
-                    $product_id = substr($key, -1);
-                    $products =  DB::table('products')->where('id', $product_id)->first();
-                    $total_price += $products->price;
-                    //پایان عملیات گام اول
-
-                    //گام دوم : وارد کردن نام محصولات به جدول پیوت
-                    $order_count = DB::table('orders')->select('id')->get();
-
-                    if (isset($order_count->id)) {
-                        $last_order_id = (DB::table("orders")->orderBy('id', 'desc')->first()->id) + 1;
-                    } else {
-                        $last_order_id = 1;
-                    }
-                    DB::table('order_products')->insert([
-                        'order_id' => $last_order_id,
-                        'product_id' => $product_id,
-                    ]);
-                    //پایان گام دوم
-                }
-                //گام سوم : تعیین مجدد موجودی درون جدول محصولات
-
-                $product_inventory = ($products->inventory - $product_count);
-                $product_sold_number = ($products->sold_number + $product_count);
-
-                DB::table('products')->where('id', $product_id)->update([
-                    'inventory' => $product_inventory,
-                    'sold_number' => $product_sold_number,
-                ]);
-                //پایان گام سوم
-            }
-        }
-
-
-        DB::table('orders')->insert([
+        Order::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
             'total_price' => $total_price,
             'created_at' => date('Y-m-d H:i:s'),
-
         ]);
 
-
-        return redirect('/orders');
-    }
-    public function edit($id)
-    {
-        $order = DB::table('orders')->where('id',$id)->first();
-        $user =DB::table('users')->where('id',$id)->first();
-        $product =DB::table('products')->where('id',$id)->first();
-
-        $products = DB::table('products')->get();
-        $order_products = DB::table('order_products')->get();
-
-        return view('orders.editOrderMenue', ['order' => $order , 'user' => $user, 'product' => $product, 'products' => $products, 'order_products' => $order_products]);
-    }
-    public function update(Request $request,$id )
-    {
-        $total_price = 0;
-        $title = DB::table('orders')->where('id',$id)->first()->title;
         foreach ($request->all() as $key => $product_count) {
 
             if (Str::is('Product*', $key)) {
-                for ($i = 0; $i < $product_count; $i++) {
-                    $product_id = substr($key, -1);
-                    $products = DB::table('products')->where('id', $product_id)->first();
-                    $total_price += ($products->price);
-//                $product_sold_number = ($products['sold_number'] + $product_count);
-                    if (isset($order_count->id)) {
-                        $last_order_id = (DB::table("orders")->orderBy('id', 'desc')->first()->id) + 1;
-                    } else {
-                        $last_order_id = 1;
-                    }
-                    DB::table('order_products')->insert([
-                        'order_id' => $last_order_id,
-                        'product_id' => $product_id,
-                    ]);
+
+                $product_id = substr($key, -1);
+                $products = Product::where('id', $product_id)->first();
+                $total_price += $products->price * $product_count;
+                //پایان عملیات گام اول
+
+                //گام دوم : وارد کردن نام محصولات به جدول پیوت
+                $last_order_id = Order::select('id')->get()->max('id');
+                if ($last_order_id == null) {
+                    $last_order_id = 1;
                 }
 
-                $product_inventory = ($products->inventory - $product_count);
-                DB::table('products')->where('id', $product_id)->update([
-                    'inventory' => $product_inventory,
+
+                Order_product::create([
+                    'order_id' => $last_order_id,
+                    'product_id' => $product_id,
+                    'count' => $product_count,
                 ]);
             }
         }
-        DB::table('orders')->insert([
-            'user_id' => $request->user_id,
-            'title' => $title,
+
+
+        Order::where('id', $last_order_id)->update([
             'total_price' => $total_price,
             'created_at' => date('Y-m-d H:i:s'),
+
         ]);
+
+
         return redirect('/orders');
     }
-    public function destroy($id)
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        DB::table('orders')->where('id' , $id)->update(['status' => 'disable']);
+        $order_count = Order::all()->count();
+        return view('workplace', ['order_count' => $order_count]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+
+        $order = Order::find($id)->first();
+        $user = User::find($order->user_id)->first();
+        $product_id = [];
+        $orderProducts = Order_product::all();
+        foreach ($orderProducts as $orderProduct){
+            if ($orderProduct->order_id == $id){
+                array_push($product_id, $orderProduct->product_id);
+            }
+        }
+        // برای بدست اوردن تعداد
+        $pro_count = Order_product::join('products', 'order_product.product_id', '=', 'products.id')->where('order_product.order_id' , $id)->get();
+        //---- -//
+        $products = Product::whereIn('id',$product_id)->get();
+        $orders = Order::all();
+        return view('orders.editOrderMenue', ['order_product' => $orderProducts, 'products' => $products,  'user' => $user, 'orders' => $orders, 'id' => $id, 'pro_count' => $pro_count]);
+    }
+
+
+    public function update(UpdateOrderRequest $request, string $id)
+    {
+        $total_price = 0;
+        $products_id = [];
+
+        foreach ($request->all() as $key => $product_count) {
+            if (Str::is('Product*', $key)) {
+
+                    $product_id = substr($key, -1);
+                    array_push($products_id,$product_id);
+                    $order_products = Order_product::where(['order_id' => $id, 'product_id' => $product_id])->get()->first();
+
+                    if ($order_products->count != $product_count) {
+
+                        $products = Product::where('id', $product_id)->get()->first();
+                        $total_price += $products->price * $product_count;
+                        //پایان عملیات گام اول
+
+//                        Order_product::where(['order_id' => $id,'product_id' => $order_products->product_id])->update([
+//                            'count' => $product_count,
+//                        ]);
+                    }else{
+                        $products = Product::where('id', $product_id)->first();
+                        $total_price += $products->price * $product_count;
+                    }
+
+            }
+        }
+        $order = Order::find($id);
+        $order->products()->sync($products_id);
+
+        Order::where('id',$id)->update([
+            'total_price' => $total_price,
+        ]);
+
+
+        return redirect('/orders');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        Order::destroy($id);
         return redirect('/orders');
     }
 }

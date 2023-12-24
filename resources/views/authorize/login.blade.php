@@ -18,7 +18,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
 
-            <form action="{{route('login')}}" method="post">
+            <form action="{{route('loginUser')}}" method="post">
                 @csrf
                 @if ($errors->has('email'))
                     <div class="alert alert-danger">{{ $errors->first('email') }}</div>
@@ -65,10 +65,10 @@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
-                <a href="#">رمز عبورم را فراموش کرده ام.</a>
+                <a href="{{route('resetPassword')}}">رمز عبورم را فراموش کرده ام.</a>
             </p>
             <p class="mb-0">
-                <a href="{{route('register')}}" class="text-center">ثبت نام</a>
+                <a href="{{route('createUser')}}" class="text-center">ثبت نام</a>
             </p>
         </div>
         <!-- /.login-card-body -->

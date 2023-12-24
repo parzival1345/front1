@@ -993,8 +993,8 @@ Licensed under the MIT license.
                 c = $.color.parse(colorPool[i % colorPoolSize] || "#666");
 
                 // Each time we exhaust the colors in the pool we adjust
-                // a scaling factor used to produce more variations on
-                // those colors. The factor alternates negative/positive
+                // a scaling factors used to produce more variations on
+                // those colors. The factors alternates negative/positive
                 // to produce lighter/darker colors.
 
                 // Reset the variation after every few cycles, or else
@@ -2494,9 +2494,9 @@ Licensed under the MIT license.
                 radius = series.points.radius,
                 symbol = series.points.symbol;
 
-            // If the user sets the line width to 0, we change it to a very 
+            // If the user sets the line width to 0, we change it to a very
             // small value. A line width of 0 seems to force the default of 1.
-            // Doing the conditional here allows the shadow setting to still be 
+            // Doing the conditional here allows the shadow setting to still be
             // optional even with a lineWidth of 0.
 
             if( lw == 0 )
