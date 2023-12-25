@@ -33,64 +33,48 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('factors.store')}}">
+                <form role="form" method="post" action="{{ route('factors.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="order_id">اسم سفارش</label>
-                            <select name="order_id" class="form-control" onchange="updateTotalPrice(this)">
+                            <select name="order_id" class="form-control" id="order_id" onchange="updateTotalPrice(this)">
+                                <option value="">انتخاب سفارش</option>
                                 @foreach($orders as $order)
                                     <option value="{{ $order->id }}" data-total-price="{{ $order->total_price }}">
                                         {{ $order->title }}
                                     </option>
                                 @endforeach
                             </select>
-
-
-                            <div class="form-group">
-                                <label for="total_pay">مبلغ فاکتور</label>
-                                <input type="text" class="form-control" id="total_pay" name="total_pay" readonly>
-
-                            </div>
                         </div>
-                    </div>
-                    <!-- /.card-body -->
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">ارسال</button>
+                        <div class="form-group">
+                            <label for="total_pay">مبلغ فاکتور</label>
+                            <input type="text" class="form-control" id="total_pay" name="total_pay" readonly>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">ارسال</button>
+                        </div>
                     </div>
                 </form>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var orderSelect = document.getElementById('order_id');
+                    updateTotalPrice(orderSelect);
+                });
+
+                function updateTotalPrice(selectElement) {
+                    if (selectElement.selectedIndex > -1) {
+                        var selectedOption = selectElement.options[selectElement.selectedIndex];
+                        var totalPrice = selectedOption.getAttribute('data-total-price');
+                        document.getElementById('total_pay').value = totalPrice;
+                    }
+                }
+            </script>
         </section>
     </div>
-    <!-- /.card -->
-
-
-    <!-- /.row (main row) -->
-</div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
-@include('.footer.main_footer')
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-@include('.scripts')
-<script>
-    function updateTotalPrice(selectElement) {
-        var selectedOption = selectElement.options[selectElement.selectedIndex];
-        var totalPrice = selectedOption.getAttribute('data-total-price');
-        document.getElementById('total_pay').value = totalPrice;
-    }
-</script>
-
 </body>
 
 </html>

@@ -130,6 +130,7 @@
                                 <tr>
                                     <th>شماره سفارش</th>
                                     <th>مبلغ فاکتور</th>
+                                    <th>وضعیت</th>
                                     <th>ویرایش</th>
                                     <th>حذف</th>
                                     <th>وضعیت پرداخت</th>
@@ -140,15 +141,19 @@
                                     <tr>
                                         <td>{{ $check->factor_id }}</td>
                                         <td>{{ $check->finally_price }}</td>
+                                        <td>{{ $check->status}}</td>
                                         <td>
+
                                             <form action="{{route('factors.edit',['id'=>$check->id])}}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit">
+                                            <button type="submit" @if($check->status == 'پرداخت شده') disabled @endif>
+
                                                 <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                             </button>
 
                                             </form>
+
                                         </td>
                                         <td>
                                             <form action="{{route('factors.destroy',['id'=>$check->id])}}" method="post">
@@ -161,7 +166,7 @@
                                         <td>
                                             <form action="{{route('factors.update_status',['id'=>$check->id])}}" method="post">
                                                 @csrf
-                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت">
+                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت" @if($check->status == 'پرداخت شده') disabled @endif>
 {{--                                                {{dd($check)}}--}}
                                             </form>
                                         </td>
@@ -173,6 +178,7 @@
                                 <tr>
                                     <th>شماره سفارش</th>
                                     <th>مبلغ فاکتور</th>
+                                    <th>وضعیت</th>
                                     <th>ویرایش</th>
                                     <th>حذف</th>
                                     <th>وضعیت پرداخت</th>

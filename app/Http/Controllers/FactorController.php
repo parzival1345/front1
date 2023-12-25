@@ -81,7 +81,6 @@ class FactorController extends Controller
     public function update_status($id) {
         $status = Factor::findOrfail($id);
         $status->update(['status' => 'پرداخت شده']);
-        $status->delete();
         return redirect('/factors');
     }
 }
