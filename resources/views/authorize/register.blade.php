@@ -48,6 +48,13 @@
                         </span>
                     </div>
                 </div>
+                <div class="input-group mb-3">
+                    <select class="form-control" name="role" id="role">
+                        <option value="" selected>نقش را وارد کنید</option>
+                        <option value="customer">خریدار</option>
+                        <option value="seller">فروشنده</option>
+                    </select>
+                </div>
                 <div class="row">
                     <div class="col-8">
                         <div class="checkbox icheck">

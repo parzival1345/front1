@@ -13,8 +13,13 @@ class OneMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        return $next($request);
+        if (in_array($roles , auth()->user()->role)){
+            return $next($request);
+        }else {
+            return back();
+        }
+
     }
 }

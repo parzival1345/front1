@@ -17,7 +17,9 @@ class RegisterController extends Controller
             $user = User::create([
                 'user_name' => $request->name,
                 'email' => $request->email,
+                'role' => $request->role,
                 'password' => Hash::make($request->password)
+
             ]);
             session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
 

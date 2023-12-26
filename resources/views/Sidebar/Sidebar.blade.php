@@ -70,17 +70,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'admin')
                             <a href="{{route('createUser')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> کاربر جدید</p>
                             </a>
+                            @endif
                         </li>
+                        @if(auth()->user()->role == 'admin')
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست کاربران</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -93,16 +97,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'admin')
                             <a href="{{route('factors.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> فاکتور جدید</p>
                             </a>
+                            @endif
                         </li>
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'customer' || 'admin')
                             <a href="{{route('factors.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست فاکتورها</p>
                             </a>
+                            @endif
                         </li>
                     </ul>
                 </li>
@@ -116,16 +124,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'admin' || 'seller')
                             <a href="{{route('products.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> محصول جدید</p>
                             </a>
+                            @endif
                         </li>
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'admin' || 'seller')
                             <a href="{{route('products.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست محصولات</p>
                             </a>
+                            @endif
                         </li>
                     </ul>
                 </li>
@@ -139,16 +151,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'customer' || 'admin')
                             <a href="{{route('orders.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> سفارش جدید</p>
                             </a>
+                            @endif
                         </li>
                         <li class="nav-item">
+                            @if(auth()->user()->role == 'admin')
                             <a href="{{route('orders.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست سفارشات</p>
                             </a>
+                            @endif
                         </li>
                     </ul>
                 </li>

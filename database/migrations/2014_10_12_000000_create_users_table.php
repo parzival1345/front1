@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('province')->nullable();
             $table->string('city')->nullable();
-            $table->enum('role',['admin' , 'customer' , 'seller'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
