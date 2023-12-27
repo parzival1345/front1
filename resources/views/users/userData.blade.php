@@ -384,6 +384,10 @@
                                     <th>آدرس</th>
                                     <th>شماره همراه</th>
                                     <th>کشور</th>
+                                    <th>شخصیت</th>
+                                    <th>وضعیت تایید</th>
+                                    <th>تایید</th>
+                                    <th>رد</th>
                                     <th>ویرایش</th>
                                     <th>حذف</th>
                                 </tr>
@@ -398,6 +402,29 @@
                                         <td>{{ $user->address }}</td>
                                         <td>{{ $user->phone_number }}</td>
                                         <td>{{ $user->country }}</td>
+                                        <td>{{$user->role}}</td>
+                                        <td>{{$user->status}}</td>
+
+                                        <td>
+                                            @if($user->role == 'seller')
+                                            <form action="{{route('users.accept',['id' => $user->id])}}" method="post">
+                                                @csrf
+                                                <button type="submit">
+                                                    <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                </button>
+                                            </form>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($user->role == 'seller')
+                                            <form action="{{route('users.reject',['id'=>$user->id])}}">
+                                                @csrf
+                                                <button type="submit">
+                                                    <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                </button>
+                                            </form>
+                                            @endif
+                                        </td>
                                         <td>
                                             <form class="" action="{{route('users.edit',['id'=>$user->id])}}"
                                                   method="get">

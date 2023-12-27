@@ -13,13 +13,22 @@ class RegisterController extends Controller
 {
     public function createUser(RegisterRequest $request)
     {
+        if ($request->role == 'seller') {
+            User::create([
+                'user_name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'password' => Hash::make($request->password),
+                'status' => 'در انتظار تایید',
+            ]);
+            return view('authorize.acceptRole');
+        }else {
         try {
             $user = User::create([
                 'user_name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role,
                 'password' => Hash::make($request->password)
-
             ]);
             session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
 
@@ -31,5 +40,22 @@ class RegisterController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+        }
+    }
+
+    public function accept($id) {
+        $user = User::find($id);
+        $user->update(['status' => 'تایید شده']);
+        session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
+        return view('authorize.login');
+    }
+
+    public function acceptReject() {
+        return view('authorize.acceptRole');
+    }
+
+    public function reject($id) {
+        User::find($id)->update(['status' => 'رد شده'])->delete();
+        return view('authorize.login');
     }
 }

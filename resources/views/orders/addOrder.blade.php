@@ -45,11 +45,9 @@
                         </div>
                         <label for="customer_id">customers</label>
                         <select class="form-control" id="user_id" name="user_id">
-                        @foreach($users as $user)
-                                <option value="{{$user->id}}">
-                                    username: {{$user->user_name}}
+                                <option value="{{Auth::user()->id}}">
+                                    username: {{Auth::user()->user_name}}
                                 </option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="card-body">

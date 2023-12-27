@@ -35,6 +35,7 @@ class User extends Authenticatable
         'province',
         'city',
         'role',
+        'status',
     ];
 
     /**

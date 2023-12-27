@@ -15,11 +15,14 @@ class OneMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (in_array($roles , auth()->user()->role)){
-            return $next($request);
-        }else {
-            return back();
-        }
+        // فرض بر این است که نقش‌های کاربر در یک آرایه ذخیره شده‌اند
+        $userRoles = auth()->user()->role;
 
+        // چک می‌کند که آیا کاربر حداقل یکی از نقش‌های مورد نیاز را دارد
+        if (in_array($userRoles, $roles)) {
+            return $next($request);
+        }
+        // اگر هیچ یک از نقش‌های مورد نیاز را نداشت، کاربر را به صفحه قبلی ریدایرکت می‌کند
+        return redirect()->back();
     }
 }
