@@ -32,9 +32,7 @@ class FactorController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
         Factor::create([
-
             'factor_id' => $request->order_id,
             'finally_price' => $request->total_pay,
             'created_at'=>date('Y-m-d H:i:s'),

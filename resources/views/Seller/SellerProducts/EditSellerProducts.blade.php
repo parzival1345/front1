@@ -51,11 +51,11 @@
                             <input type="number" class="form-control" id="amount_available" name="amount_available"
                                    value="{{$products->inventory}}">
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label for="amount_sold">فروش رقته</label>--}}
-{{--                            <input type="number" class="form-control" id="amount_sold" name="amount_sold"--}}
-{{--                                   value="{{$product->amount_sold}}">--}}
-{{--                        </div>--}}
+                        {{--                        <div class="form-group">--}}
+                        {{--                            <label for="amount_sold">فروش رقته</label>--}}
+                        {{--                            <input type="number" class="form-control" id="amount_sold" name="amount_sold"--}}
+                        {{--                                   value="{{$product->amount_sold}}">--}}
+                        {{--                        </div>--}}
                         <div class="form-group">
                             <label for="explanation">توضیحات</label>
                             <textarea class="form-control" rows="4" id="explanation" name="explanation"
@@ -79,7 +79,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -88,7 +88,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 </body>
 
 </html>

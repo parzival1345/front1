@@ -33,7 +33,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{ route('factors.store') }}">
+                <form role="form" method="post" action="{{ route('admin_factors.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">

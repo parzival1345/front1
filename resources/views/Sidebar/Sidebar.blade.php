@@ -72,7 +72,7 @@
                     <ul class="nav nav-treeview">
                         @if(auth()->user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="{{route('createUser')}}" class="nav-link">
+                            <a href="{{route('admin_users.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> کاربر جدید</p>
                             </a>
@@ -80,7 +80,7 @@
                         @endif
                         @if(auth()->user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="{{route('users.index')}}" class="nav-link">
+                            <a href="{{route('admin_users.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست کاربران</p>
                             </a>
@@ -100,7 +100,7 @@
                     <ul class="nav nav-treeview">
                         @if(auth()->user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="{{route('factors.create')}}" class="nav-link">
+                            <a href="{{route('admin_factors.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> فاکتور جدید</p>
                             </a>
@@ -108,7 +108,7 @@
                         @endif
                         @if(auth()->user()->role == 'customer' || auth()->user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="{{route('factors.index')}}" class="nav-link">
+                            <a href="{{route('admin_factors.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست فاکتورها</p>
                             </a>
@@ -128,7 +128,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             @if(auth()->user()->role == 'admin' || auth()->user()->role == 'seller')
-                            <a href="{{route('products.create')}}" class="nav-link">
+                            <a href="{{route('admin_products.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> محصول جدید</p>
                             </a>
@@ -136,7 +136,7 @@
                         </li>
                         <li class="nav-item">
                             @if(auth()->user()->role == 'admin' || auth()->user()->role == 'seller')
-                            <a href="{{route('products.index')}}" class="nav-link">
+                            <a href="{{route('admin_products.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست محصولات</p>
                             </a>
@@ -157,7 +157,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             @if(auth()->user()->role == 'customer' || auth()->user()->role == 'admin')
-                            <a href="{{route('orders.create')}}" class="nav-link">
+                            <a href="{{route('admin_orders.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> سفارش جدید</p>
                             </a>
@@ -165,18 +165,10 @@
                         </li>
                         <li class="nav-item">
                             @if(auth()->user()->role == 'admin')
-                            <a href="{{route('orders.index')}}" class="nav-link">
+                            <a href="{{route('admin_orders.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست سفارشات</p>
                             </a>
-                            @endif
-                        </li>
-                        <li class="nav-item">
-                            @if(auth()->user()->role == 'admin' || auth()->user()->role == 'customer')
-                                <a href="{{route('orders.index')}}" class="nav-link">
-                                    <i class="fas fa-list nav-icon"></i>
-                                    <p>سفارشات شما</p>
-                                </a>
                             @endif
                         </li>
                     </ul>

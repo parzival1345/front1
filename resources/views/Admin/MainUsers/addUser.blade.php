@@ -32,14 +32,15 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('users.store')}}">
+                <form role="form" method="post" action="{{route('admin_users.store')}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
                                     <label for="email">ایمیل</label>
-                                    <input type="email" class="form-control" value="{{old('email')}}" id="email" name="email"
+                                    <input type="email" class="form-control" value="{{old('email')}}" id="email"
+                                           name="email"
                                            placeholder="ایمیل را وارد کنید">
                                     @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -47,7 +48,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="first_name">نام</label>
-                                    <input type="text" class="form-control" value="{{old('first_name')}}"id="first_name" name="first_name"
+                                    <input type="text" class="form-control" value="{{old('first_name')}}"
+                                           id="first_name" name="first_name"
                                            placeholder="نام">
                                     @error('first_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -55,7 +57,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="last_name">نام خانوادگی</label>
-                                    <input type="text" class="form-control" value="{{old('last_name')}}"id="last_name" name="last_name"
+                                    <input type="text" class="form-control" value="{{old('last_name')}}" id="last_name"
+                                           name="last_name"
                                            placeholder="نام خانوادگی">
                                     @error('last_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -67,7 +70,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="user_name">نام کاربری</label>
-                                        <input type="text" class="form-control" value="{{old('user_name')}}" id="user_name" name="user_name"
+                                    <input type="text" class="form-control" value="{{old('user_name')}}" id="user_name"
+                                           name="user_name"
                                            placeholder="نام کاربری">
                                     @error('user_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -75,7 +79,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="phone_number">شماره همراه</label>
-                                    <input type="text" class="form-control" value="{{old('phone_number')}}" id="phone_number" name="phone_number"
+                                    <input type="text" class="form-control" value="{{old('phone_number')}}"
+                                           id="phone_number" name="phone_number"
                                            placeholder="09123456789">
                                     @error('phone_number')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -96,7 +101,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="gender">جنسیت</label>
-                                    <select class="form-control"  value="{{old('gender')}}"id="gender" name="gender">
+                                    <select class="form-control" value="{{old('gender')}}" id="gender" name="gender">
                                         <option value="male" selected>مرد</option>
                                         <option value="female">زن</option>
                                         <option value="other">سایر</option>
@@ -104,7 +109,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="postal_code">کد پستی</label>
-                                    <input type="number" class="form-control" value="{{old('postal_code')}}" id="postal_code" name="postal_code"
+                                    <input type="number" class="form-control" value="{{old('postal_code')}}"
+                                           id="postal_code" name="postal_code"
                                            placeholder="کد پستی را وارد کنید">
                                     @error('postal_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -116,7 +122,8 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="country">کشور</label>
-                                    <input type="text" class="form-control" value="{{old('country')}}" id="country" name="country"
+                                    <input type="text" class="form-control" value="{{old('country')}}" id="country"
+                                           name="country"
                                            placeholder="کشور خود را وارد کنید">
                                     @error('country')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -124,7 +131,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="province">استان</label>
-                                    <input type="text" class="form-control" value="{{old('province')}}" id="province" name="province"
+                                    <input type="text" class="form-control" value="{{old('province')}}" id="province"
+                                           name="province"
                                            placeholder="استان خود را وارد کنید">
                                     @error('province')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -132,7 +140,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="city">شهر</label>
-                                    <input type="text" class="form-control" value="{{old('city')}}" id="city" name="city"
+                                    <input type="text" class="form-control" value="{{old('city')}}" id="city"
+                                           name="city"
                                            placeholder="شهر خود را وارد کنید">
                                     @error('city')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -142,7 +151,8 @@
                         </div>
                         <div class="form-group">
                             <label for="address">آدرس</label>
-                            <input type="text" class="form-control" value="{{old('address')}}" id="address" name="address"
+                            <input type="text" class="form-control" value="{{old('address')}}" id="address"
+                                   name="address"
                                    placeholder="آدرس را وارد کنید">
                         </div>
 
@@ -187,7 +197,7 @@
 
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -196,7 +206,7 @@
 <!-- /.control-sidebar -->
 
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 </body>
 
 </html>

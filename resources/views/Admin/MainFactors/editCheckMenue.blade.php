@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل مدیریت | داشبورد اول</title>
+    <title>پنل ادمین | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('styleSheets.styleSheets')
@@ -32,16 +32,17 @@
         <!-- Main row -->
         <section class="content">
             <!-- form start -->
-{{--            @dd($check)--}}
+            {{--            @dd($check)--}}
 
 
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('factors.update',['id' => $check->id]) }}">
+                <form role="form" method="post" action="{{route('admin_factors.update',['id' => $check->id]) }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="order_number">شماره سفارش</label>
-                            <select name="order_id" class="form-control" onchange="updateTotalPrice(this)">
+                            <label for="order_id">شماره سفارش</label>
+                            <select name="order_id" class="form-control" id="order_id" onchange="updateTotalPrice(this)">
+                                <option value="">انتخاب سفارش</option>
                                 @foreach($orders as $order)
                                     <option value="{{ $order->id }}" data-total-price="{{ $order->total_price }}">
                                         {{ $order->id }}
@@ -73,7 +74,7 @@
 
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -82,7 +83,7 @@
 <!-- /.control-sidebar -->
 
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 <script>
     function updateTotalPrice(selectElement) {
         var selectedOption = selectElement.options[selectElement.selectedIndex];

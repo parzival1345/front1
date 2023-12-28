@@ -32,7 +32,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('users.update',['id' => $users->id])}}">
+                <form role="form" method="post" action="{{route('admin_users.update',['id' => $users->id])}}">
                     @csrf
                     @method('patch')
                     <div class="card-body">
@@ -114,7 +114,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -123,7 +123,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 </body>
 
 </html>

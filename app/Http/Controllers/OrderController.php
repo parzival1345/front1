@@ -135,11 +135,6 @@ class OrderController extends Controller
 
                         $products = Product::where('id', $product_id)->get()->first();
                         $total_price += $products->price * $product_count;
-                        //پایان عملیات گام اول
-
-//                        Order_product::where(['order_id' => $id,'product_id' => $order_products->product_id])->update([
-//                            'count' => $product_count,
-//                        ]);
                     }else{
                         $products = Product::where('id', $product_id)->first();
                         $total_price += $products->price * $product_count;

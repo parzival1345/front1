@@ -35,23 +35,23 @@
             <div class="container-fluid">
                 <form role="form" method="post" action="{{route('orders.update',['id'=>$id])}}">
                     @csrf
-{{--                    @method('patch')--}}
+                    {{--                    @method('patch')--}}
                     <div class="card-body">
                         <div class="form-group">
                             <label for="user_id">user</label>
                             <select class="form-control" id="user_id" name="user_id">
-{{--                                @if(empty($user))--}}
-{{--                                    {{$last_order = max('id')}}--}}
-{{--                                    {{$befor_last_order =where('id','<',$last_order)->orderby('id','desc')->take(1)->first()}}--}}
-{{--                                    {{$akahrin_id = $befor_last_order->id + 1}}--}}
-{{--                                @else--}}
-                                    <option value="{{$user->id}}"
-                                            @if($user->id == $id) selected @endif>
-                                        Email: {{$user->email}},
-                                        name: {{$user->last_name}},
-                                        ID : {{$user->id}},
-                                    </option>
-{{--                                @endif--}}
+                                {{--                                @if(empty($user))--}}
+                                {{--                                    {{$last_order = max('id')}}--}}
+                                {{--                                    {{$befor_last_order =where('id','<',$last_order)->orderby('id','desc')->take(1)->first()}}--}}
+                                {{--                                    {{$akahrin_id = $befor_last_order->id + 1}}--}}
+                                {{--                                @else--}}
+                                <option value="{{$user->id}}"
+                                        @if($user->id == $id) selected @endif>
+                                    Email: {{$user->email}},
+                                    name: {{$user->last_name}},
+                                    ID : {{$user->id}},
+                                </option>
+                                {{--                                @endif--}}
                             </select>
                         </div>
                         <div class="card-body">
@@ -95,7 +95,7 @@
                                                                     </button>
                                                                     <input min="0" name="Product_{{$product->id}}"
                                                                            placeholder="0"
-                                                                               @foreach($pro_count as $orderProduct)
+                                                                           @foreach($pro_count as $orderProduct)
                                                                                @if ($orderProduct->id == $product->id)
                                                                                    value="{{$orderProduct->count}}"
                                                                            @endif
@@ -133,7 +133,7 @@
                                    @foreach($orders as $order)
                                        @if($order->id == $orderProduct->order_id)
 
-                                   value="{{$order->total_price}}"
+                                           value="{{$order->total_price}}"
                                    placeholder="order_total_price">
                             @endif
                             @endforeach
@@ -158,7 +158,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -167,7 +167,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 </body>
 
 </html>

@@ -45,9 +45,9 @@
                         </div>
                         <label for="customer_id">customers</label>
                         <select class="form-control" id="user_id" name="user_id">
-                                <option value="{{Auth::user()->id}}">
-                                    username: {{Auth::user()->user_name}}
-                                </option>
+                            <option value="{{Auth::user()->id}}">
+                                username: {{Auth::user()->user_name}}
+                            </option>
                         </select>
                     </div>
                     <div class="card-body">
@@ -91,7 +91,8 @@
                                                                        max="{{$product->inventory}}"
                                                                        class="form-control form-control-sm"
                                                                        style="width: 70px;"/>
-                                                                <button class="btn btn-link px-2" type="button" name="plus_button"
+                                                                <button class="btn btn-link px-2" type="button"
+                                                                        name="plus_button"
                                                                         onclick="changeProductQuantity(this, 1)">
                                                                     <i class="fas fa-plus"></i>
                                                                 </button>
@@ -134,7 +135,7 @@
 <!-- /.content -->
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -143,7 +144,7 @@
 <!-- /.control-sidebar -->
 
 <!-- ./wrapper -->
-@include('.scripts')
+@include('scripts')
 </body>
 
 </html>

@@ -16,10 +16,6 @@ class LogoutController extends Controller
             $token->delete();
             Auth::logout();
         });
-        //        auth()->logout();
-//        auth()->user()->tokens()->where('token', session()->get('token'))->update([
-//            'token' => null,
-//        ]);
 
     return redirect('/login');
     }

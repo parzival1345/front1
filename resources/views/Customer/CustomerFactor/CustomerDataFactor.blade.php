@@ -7,20 +7,20 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('.styleSheets.dataStyle')
-    @include('.styleSheets.styleSheets')
+    @include('styleSheets.dataStyle')
+    @include('styleSheets.styleSheets')
 
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('.navbar.navbar')
+    @include('navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('.Sidebar.Sidebar')
+        @include('Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -28,7 +28,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 
-        @include('.header.data.checksData_header')
+        @include('header.data.checksData_header')
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -55,7 +55,7 @@
                                                                        name="filterOrderId" placeholder="شماره سفارش"
                                                                        @if(isset($_GET['filterOrderId']))
                                                                            value="{{$_GET['filterOrderId']}}"
-                                                                        @endif>
+                                                                    @endif>
                                                             </div>
                                                             <div class="col">
                                                                 <label for="filterLastName">نام محصول</label>
@@ -65,7 +65,7 @@
                                                                        placeholder="نام محصول "
                                                                        @if(isset($_GET['filterLastName']))
                                                                            value="{{$_GET['filterLastName']}}"
-                                                                        @endif>
+                                                                    @endif>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -84,7 +84,7 @@
                                                                        placeholder="نام کاربری"
                                                                        @if(isset($_GET['filterUserName']))
                                                                            value="{{$_GET['filterUserName']}}"
-                                                                        @endif>
+                                                                    @endif>
                                                             </div>
                                                             <div class="col">
                                                                 <div class="row">
@@ -94,20 +94,22 @@
                                                                         <label for="filterOrderTotalPriceMin"
                                                                                id="filterAge">از</label>
                                                                         <input type="number" class="form-control"
-                                                                               id="filterOrderTotalPriceMin" name="filterAgeMin"
+                                                                               id="filterOrderTotalPriceMin"
+                                                                               name="filterAgeMin"
                                                                                placeholder="از"
                                                                                @if(isset($_GET['filterOrderTotalPriceMin']))
                                                                                    value="{{$_GET['filterOrderTotalPriceMin']}}"
-                                                                                @endif>
+                                                                            @endif>
                                                                     </div>
                                                                     <div class="col">
                                                                         <label for="filterOrderTotalPriceMax">تا</label>
                                                                         <input type="number" class="form-control"
-                                                                               id="filterOrderTotalPriceMax" name="filterOrderTotalPriceMax"
+                                                                               id="filterOrderTotalPriceMax"
+                                                                               name="filterOrderTotalPriceMax"
                                                                                placeholder="تا"
                                                                                @if(isset($_GET['filterOrderTotalPriceMax']))
                                                                                    value="{{$_GET['filterOrderTotalPriceMax']}}"
-                                                                                @endif>
+                                                                            @endif>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -145,18 +147,20 @@
                                         <td>
 
                                             <form action="{{route('factors.edit',['id'=>$check->id])}}">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" @if($check->status == 'پرداخت شده') disabled @endif>
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        @if($check->status == 'پرداخت شده') disabled @endif>
 
-                                                <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                            </button>
+                                                    <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                </button>
 
                                             </form>
 
                                         </td>
                                         <td>
-                                            <form action="{{route('factors.destroy',['id'=>$check->id])}}" method="post">
+                                            <form action="{{route('factors.destroy',['id'=>$check->id])}}"
+                                                  method="post">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')">
                                                     <i class="fa-regular fa-trash-can"></i>
@@ -164,10 +168,12 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('factors.update_status',['id'=>$check->id])}}" method="post">
+                                            <form action="{{route('factors.update_status',['id'=>$check->id])}}"
+                                                  method="post">
                                                 @csrf
-                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت" @if($check->status == 'پرداخت شده') disabled @endif>
-{{--                                                {{dd($check)}}--}}
+                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"
+                                                       @if($check->status == 'پرداخت شده') disabled @endif>
+                                                {{--                                                {{dd($check)}}--}}
                                             </form>
                                         </td>
                                     </tr>
@@ -197,7 +203,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('.footer.main_footer')
+    @include('footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

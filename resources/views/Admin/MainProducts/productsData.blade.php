@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
-    <!DOCTYPE html>
+        <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,21 +8,21 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('.styleSheets.dataStyle')
-    @include('.styleSheets.styleSheets')
+    @include('styleSheets.dataStyle')
+    @include('styleSheets.styleSheets')
 
 
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('.navbar.navbar')
+    @include('navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('.Sidebar.Sidebar')
+        @include('Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -30,7 +30,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 
-        @include('.header.data.productsData_header')
+        @include('header.data.productsData_header')
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -53,7 +53,7 @@
                                 <tbody>
                                 @php($temp = 0)
                                 @foreach ($products as $product)
-                                        <tr>
+                                    <tr>
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->title }}</td>
                                         <td>{{ $product->description }}</td>
@@ -61,19 +61,19 @@
                                         <td>{{ $product->inventory }}</td>
 
                                         <td>
-                                            <form action="{{ route('products.edit', ['id' => $product->id]) }}"
+                                            <form action="{{ route('admin_products.edit', ['id' => $product->id]) }}"
                                                   method="get">
                                                 <button type="submit"><i
-                                                        class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                            class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                 </button>
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{ route('products.destroy', ['id' => $product->id]) }}"
+                                            <form action="{{ route('admin_products.destroy', ['id' => $product->id]) }}"
                                                   method="post">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')"><i
-                                                        class="fa-regular fa-trash-can"></i></button>
+                                                            class="fa-regular fa-trash-can"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -103,7 +103,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('.footer.main_footer')
+    @include('footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

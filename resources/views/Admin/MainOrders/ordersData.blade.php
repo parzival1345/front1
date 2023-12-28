@@ -7,19 +7,19 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('.styleSheets.dataStyle')
-    @include('.styleSheets.styleSheets')
+    @include('styleSheets.dataStyle')
+    @include('styleSheets.styleSheets')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('.navbar.navbar')
+    @include('navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('.Sidebar.Sidebar')
+        @include('Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,7 +27,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 
-        @include('.header.data.ordersData_header')
+        @include('header.data.ordersData_header')
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -55,6 +55,7 @@
                                     <tbody>
                                     @php($temp = 0)
                                     @foreach ($orders as $order)
+
                                         <tr>
                                             <td>{{$order->id}}</td>
                                             <td>{{$order->title}}</td>
@@ -69,7 +70,8 @@
                                                     <div class="card-body">
                                                         <table>
                                                             <tr>
-                                                                <th>{{$order->user->user_name}}
+                                                                <th>
+                                                                    {{$order->user->user_name}}
                                                                     {{$order->user->last_name}}</th>
                                                                 <th>{{$order->user->email}}</th>
                                                             </tr>
@@ -99,7 +101,7 @@
                                             </td>
                                             <td>{{ $order->total_price }}</td>
                                             <td>
-                                                <form class="" action="{{route('orders.edit',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin_orders.edit',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -107,7 +109,7 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('orders.destroy',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin_orders.destroy',['id'=>$order->id])}}"
                                                       method="post">
                                                     @csrf
                                                     <button type="submit" onclick="return confirm('Are you sure?')">
@@ -116,7 +118,7 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('factors.create',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin_factors.create',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -152,7 +154,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('.footer.main_footer')
+    @include('footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
