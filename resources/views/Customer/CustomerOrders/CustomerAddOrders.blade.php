@@ -35,7 +35,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('orders.store')}}">
+                <form role="form" method="post" action="{{route('customer_orders.store')}}">
                     @csrf
                     <div class="form-group">
                         <div class="col">

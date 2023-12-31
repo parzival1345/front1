@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-info">فیلتر</button>
-                                                <a href="{{ route('factors.index') }}">
+                                                <a href="{{ route('seller_factors.index') }}">
                                                     <button type="button" class="btn btn-warning">حذف فیلتر ها</button>
                                                 </a>
                                             </div>
@@ -144,38 +144,38 @@
                                         <td>{{ $check->factor_id }}</td>
                                         <td>{{ $check->finally_price }}</td>
                                         <td>{{ $check->status}}</td>
-                                        <td>
+{{--                                        <td>--}}
 
-                                            <form action="{{route('factors.edit',['id'=>$check->id])}}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit"
-                                                        @if($check->status == 'پرداخت شده') disabled @endif>
+{{--                                            <form action="{{route('factors.edit',['id'=>$check->id])}}">--}}
+{{--                                                @csrf--}}
+{{--                                                @method('PUT')--}}
+{{--                                                <button type="submit"--}}
+{{--                                                        @if($check->status == 'پرداخت شده') disabled @endif>--}}
 
-                                                    <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                </button>
+{{--                                                    <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>--}}
+{{--                                                </button>--}}
 
-                                            </form>
+{{--                                            </form>--}}
 
-                                        </td>
-                                        <td>
-                                            <form action="{{route('factors.destroy',['id'=>$check->id])}}"
-                                                  method="post">
-                                                @csrf
-                                                <button type="submit" onclick="return confirm('Are you sure?')">
-                                                    <i class="fa-regular fa-trash-can"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form action="{{route('factors.update_status',['id'=>$check->id])}}"
-                                                  method="post">
-                                                @csrf
-                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"
-                                                       @if($check->status == 'پرداخت شده') disabled @endif>
-                                                {{--                                                {{dd($check)}}--}}
-                                            </form>
-                                        </td>
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <form action="{{route('factors.destroy',['id'=>$check->id])}}"--}}
+{{--                                                  method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                <button type="submit" onclick="return confirm('Are you sure?')">--}}
+{{--                                                    <i class="fa-regular fa-trash-can"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <form action="{{route('factors.update_status',['id'=>$check->id])}}"--}}
+{{--                                                  method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"--}}
+{{--                                                       @if($check->status == 'پرداخت شده') disabled @endif>--}}
+{{--                                                --}}{{--                                                {{dd($check)}}--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

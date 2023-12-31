@@ -8,6 +8,31 @@ use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
+    public function filter(Request $request) {
+        $users = User::all();
+        if ($request->filterEmail)
+            $users = $users->where('email', $request->filterEmail);
+        if ($request->filterFirstName)
+            $users = $users->where('first_name', $request->filterFirstName);
+        if ($request->filterLastName)
+            $users = $users->where('last_name', $request->filterLastName);
+        if ($request->filterUserName)
+            $users = $users->where('user_name', $request->filterUserName);
+        if ($request->filterAgeMin && $request->filterAgeMax)
+            $users = $users->whereBetween('age', [$request->filterAgeMin,$request->filterAgeMax]);
+        if ($request->filterPhoneNumber)
+            $users = $users->where('phone_number', $request->filterPhoneNumber);
+        if ($request->filterPostalCode)
+            $users = $users->where('post_code', $request->filterPostalCode);
+        if ($request->filterGender)
+            $users = $users->where('gender', $request->filterGender);
+        if ($request->filterStatus)
+            $users = $users->where('status', $request->filterStatus);
+        if ($request->filterRoles)
+            $users = $users->where('role', $request->filterRoles);
+
+        return view('Admin.MainUsers.userData', compact('users'));
+    }
     public function index()
     {
         $users = User::all();
@@ -40,8 +65,8 @@ class AdminUserController extends Controller
     }
 
     public function edit($id) {
-        $user = User::where ('id' , $id)->get->first();
-        return view('Admin.MainUsers.editUser',['user' => $user]);
+        $users = User::where ('id' , $id)->first();
+        return view('Admin.MainUsers.editUser',['users' => $users]);
     }
 
     public function update(Request $request,$id) {
@@ -59,11 +84,14 @@ class AdminUserController extends Controller
             'province' => $request->province,
             'city' => $request->city,
         ]);
-        return redirect('/admin');
+        return redirect('/admin/users');
     }
 
     public function destroy($id) {
+        User::find($id)->update([
+            'email' => null,
+        ]);
         User::where('id' , $id)->delete();
-        return redirect('/admin');
+        return redirect('/admin/users');
     }
 }

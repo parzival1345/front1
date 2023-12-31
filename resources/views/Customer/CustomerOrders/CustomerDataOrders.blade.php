@@ -99,7 +99,7 @@
                                             </td>
                                             <td>{{ $order->total_price }}</td>
                                             <td>
-                                                <form class="" action="{{route('orders.edit',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('customer_orders.edit',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -107,7 +107,7 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('orders.destroy',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('customer_orders.destroy',['id'=>$order->id])}}"
                                                       method="post">
                                                     @csrf
                                                     <button type="submit" onclick="return confirm('Are you sure?')">
@@ -116,7 +116,7 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('factors.create',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('customer_factors.create',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>

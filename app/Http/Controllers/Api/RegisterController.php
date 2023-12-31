@@ -21,7 +21,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
                 'status' => 'در انتظار تایید',
             ]);
-            return view('authorize.acceptRole');
+            return view('authorize/register')->with('message' , 'لطفا منتظر تایید ادمین باشید');
         }else {
         try {
             $user = User::create([
@@ -47,15 +47,11 @@ class RegisterController extends Controller
         $user = User::find($id);
         $user->update(['status' => 'تایید شده']);
         session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
-        return view('authorize.login');
-    }
-
-    public function acceptReject() {
-        return view('authorize.acceptRole');
+        return back();
     }
 
     public function reject($id) {
         User::find($id)->update(['status' => 'رد شده'])->delete();
-        return view('authorize.login');
+        return back();
     }
 }

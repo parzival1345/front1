@@ -36,7 +36,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div id="accordionHead">
-                                <form role="form" method="get" action="{{--{{ route('filterUsers') }}--}}">
+                                <form role="form" method="get" action="{{route('admin_users.filter')}}">
                                     <div class="card">
                                         <div class="card-header bg-light">
                                             <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
@@ -410,7 +410,7 @@
                                                 <form action="{{route('users.accept',['id' => $user->id])}}"
                                                       method="post">
                                                     @csrf
-                                                    <button type="submit">
+                                                    <button type="submit" @if($user->status == 'تایید شده') disabled @endif >
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                     </button>
                                                 </form>
@@ -418,12 +418,14 @@
                                         </td>
                                         <td>
                                             @if($user->role == 'seller')
+
                                                 <form action="{{route('users.reject',['id'=>$user->id])}}">
                                                     @csrf
-                                                    <button type="submit">
+                                                    <button type="submit"  @if($user->status == 'تایید شده') disabled @endif >
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                     </button>
                                                 </form>
+
                                             @endif
                                         </td>
                                         <td>

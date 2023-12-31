@@ -15,7 +15,6 @@ class OneMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // فرض بر این است که نقش‌های کاربر در یک آرایه ذخیره شده‌اند
         // چک می‌کند که آیا کاربر حداقل یکی از نقش‌های مورد نیاز را دارد
         if (auth()->user()->role == 'admin') {
             return $next($request);

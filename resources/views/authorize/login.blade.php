@@ -20,8 +20,8 @@
 
             <form action="{{route('loginUser')}}" method="post">
                 @csrf
-                @if ($errors->has('email'))
-                    <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                @if ($errors != '[]')
+                    <div class="alert alert-danger">{{ $errors/*->first('email')*/ }}</div>
                 @endif
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" placeholder="ایمیل"

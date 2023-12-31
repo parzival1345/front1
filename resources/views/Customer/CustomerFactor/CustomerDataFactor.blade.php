@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-info">فیلتر</button>
-                                                <a href="{{ route('factors.index') }}">
+                                                <a href="{{ route('customer_factors.index') }}">
                                                     <button type="button" class="btn btn-warning">حذف فیلتر ها</button>
                                                 </a>
                                             </div>
@@ -141,16 +141,16 @@
                                 <tbody>
                                 @foreach ($checks as $check)
                                     <tr>
-                                        <td>{{ $check->factor_id }}</td>
-                                        <td>{{ $check->finally_price }}</td>
-                                        <td>{{ $check->status}}</td>
+                                        <td>{{ $checks->factor_id }}</td>
+                                        <td>{{ $checks->finally_price }}</td>
+                                        <td>{{ $checks->status}}</td>
                                         <td>
 
-                                            <form action="{{route('factors.edit',['id'=>$check->id])}}">
+                                            <form action="{{route('customer_factors.edit',['id'=>$checks->id])}}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit"
-                                                        @if($check->status == 'پرداخت شده') disabled @endif>
+                                                        @if($checks->status == 'پرداخت شده') disabled @endif>
 
                                                     <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                 </button>
@@ -159,7 +159,7 @@
 
                                         </td>
                                         <td>
-                                            <form action="{{route('factors.destroy',['id'=>$check->id])}}"
+                                            <form action="{{route('customer_factors.destroy',['id'=>$checks->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')">
@@ -168,11 +168,11 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('factors.update_status',['id'=>$check->id])}}"
+                                            <form action="{{route('customer_factors.update_status',['id'=>$checks->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"
-                                                       @if($check->status == 'پرداخت شده') disabled @endif>
+                                                       @if($checks ->status == 'پرداخت شده') disabled @endif>
                                                 {{--                                                {{dd($check)}}--}}
                                             </form>
                                         </td>

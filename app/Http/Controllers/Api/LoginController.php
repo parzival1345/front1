@@ -12,7 +12,6 @@ class LoginController extends Controller
     public function loginUser(LoginRequest $request)
     {
         try {
-
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,

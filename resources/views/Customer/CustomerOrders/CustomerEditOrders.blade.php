@@ -33,7 +33,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('orders.update',['id'=>$id])}}">
+                <form role="form" method="post" action="{{route('customer_orders.update',['id'=>$id])}}">
                     @csrf
                     {{--                    @method('patch')--}}
                     <div class="card-body">

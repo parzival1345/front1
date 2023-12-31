@@ -13,6 +13,11 @@
     <div class="register-logo">
         <b>ثبت نام در سایت</b>
     </div>
+    @if(session('message'))
+        <div class="alert alert-info">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <div class="card">
         <div class="card-body register-card-body">

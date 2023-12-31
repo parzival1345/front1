@@ -8,9 +8,14 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\ResetPassword;
+use App\Http\Controllers\Buyer\CustomerFactorController;
+use App\Http\Controllers\Buyer\CustomerOrderController;
 use App\Http\Controllers\FactorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Seller\SellerFactorController;
+use App\Http\Controllers\Seller\SellerOrderController;
+use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,18 +75,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::any('/factors/{id}', [FactorController::class, 'update'])->name('factors.update')->middleware('role:admin,customer');
     Route::post('/factors/{id}/delete', [FactorController::class, 'destroy'])->name('factors.destroy')->middleware('role:admin,customer');
     Route::post('/factors/update_status/{id}', [FactorController::class, 'update_status'])->name('factors.update_status')->middleware('role:admin,customer');
-//UserWait
-    Route::post('/users/accept/{id}', [RegisterController::class, 'accept'])->name('users.accept');
-    Route::post('/users/reject/{id}', [RegisterController::class, 'reject'])->name('users.reject');
-
-Route::middleware(['auth' , 'role'])->prefix('admin')->group(function (){
+    //****//
+//ADMIN
+    //****//
+Route::middleware(['auth' , 'Admin_role'])->prefix('admin')->group(function (){
 //AdminUserRoutes
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin_users.index');
     Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin_users.create');
     Route::post('/users', [AdminUserController::class, 'store'])->name('admin_users.store');
     Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin_users.edit');
     Route::get('/users{id}', [AdminUserController::class, 'update'])->name('admin_users.update');
-    Route::get('/users/{id}/delete', [AdminUserController::class, 'destroy'])->name('admin_users.destroy');
+    Route::any('/users/{id}/delete', [AdminUserController::class, 'destroy'])->name('admin_users.destroy');
+//AdminUserFilterRoute
+    Route::get('/users/filter' , [AdminUserController::class , 'filter'])->name('admin_users.filter');
+//SellerWaiting
+    Route::post('/users/accept/{id}', [RegisterController::class, 'accept'])->name('users.accept');
+    Route::post('/users/reject/{id}', [RegisterController::class, 'reject'])->name('users.reject');
 //AdminProductRoutes
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin_products.index');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin_products.create');
@@ -104,5 +113,39 @@ Route::middleware(['auth' , 'role'])->prefix('admin')->group(function (){
     Route::get('/factors/{id}', [AdminFactorController::class, 'update'])->name('admin_factors.update');
     Route::get('/factors/{id}/delete', [AdminFactorController::class, 'destroy'])->name('admin_factors.destroy');
     Route::post('/factors/update_status/{id}', [AdminFactorController::class, 'update_status'])->name('admin_factors.update_status');
+});
+    //****//
+//CUSTOMER
+    //****//
+Route::middleware(['auth','Customer_role'])->prefix('customer')->group(function (){
+//CustomerOrderRoutes
+    Route::get('/orders' , [CustomerOrderController::class , 'index'])->name('customer_orders.index');
+    Route::get('/orders/create' , [CustomerOrderController::class , 'create'])->name('customer_orders.create');
+    Route::post('/orders' , [CustomerOrderController::class , 'store'])->name('customer_orders.store');
+    Route::get('/orders/{id}/edit' , [CustomerOrderController::class , 'edit'])->name('customer_orders.edit');
+    Route::get('/orders/{id}' , [CustomerOrderController::class , 'update'])->name('customer_orders.update');
+    Route::get('/orders/{id}/delete' , [CustomerOrderController::class , 'destroy'])->name('customer_orders.destroy');
+//CustomerFactorRoute
+    Route::get('/factors' , [CustomerFactorController::class , 'index'])->name('customer_factors.index');
+    Route::get('/factors/create' , [CustomerFactorController::class , 'create'])->name('customer_factors.create');
+    Route::post('/factors' , [CustomerOrderController::class , 'store'])->name('customer_factors.store');
+    Route::get('/factors/{id}/edit' , [CustomerOrderController::class , 'edit'])->name('customer_factors.edit');
+    Route::get('/factors/{id}' , [CustomerOrderController::class , 'update'])->name('customer_factors.update');
+    Route::get('/factors/{id}/delete' , [CustomerOrderController::class , 'destroy'])->name('customer_factors.destroy');
+    Route::post('/factors/update_status/{id}', [AdminFactorController::class, 'update_status'])->name('customer_factors.update_status');
+    //****//
+//SELLER
+    //****//
+Route::middleware(['auth' , 'SellerMiddleware'])->prefix('seller')->group(function (){
+//SellerProductRoutes
+    Route::get('/products' , [SellerProductController::class , 'index'])->name('seller_products.index');
+    Route::get('/products/create' , [SellerProductController::class , 'create'])->name('seller_products.create');
+    Route::post('/products' , [SellerProductController::class , 'store'])->name('seller_products.store');
+    Route::get('/products/{id}/edit' , [SellerProductController::class , 'edit'])->name('seller_products.edit');
+    Route::get('/products/{id}' , [SellerProductController::class , 'update'])->name('seller_products.update');
+    Route::get('/products/{id}/delete' , [SellerProductController::class , 'destroy'])->name('seller_products.destroy');
+//SellerFactorRoutes
+    Route::get('factors' , [SellerFactorController::class , 'index'])->name('seller_factors.index');
+});
 });
 });
