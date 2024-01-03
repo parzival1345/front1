@@ -14,6 +14,7 @@ class Product extends Model
 
     protected $fillable =
         [
+            'user_id',
             'title',
             'price',
             'inventory',
@@ -23,5 +24,9 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

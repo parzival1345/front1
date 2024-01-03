@@ -38,6 +38,49 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div id="accordion">
+                            <form role="form" method="get" action="{{route('admin_products.filter')}}">
+                                @csrf
+                                <div class="card">
+                                    <div class="card-header bg-light">
+                                    <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
+                                        فیلتر ها
+                                    </a>
+                                    </div>
+                                <div class="collapse" id="fillters" data-bs-parent="#accordionHead">
+                                    <div class="card-body">
+                                        <div class="form-control">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="email">نام محصول</label>
+                                                        <input type="text" class="form-control"
+                                                               id="title" name="filter[title]"
+                                                               placeholder="نام محصول"
+                                                               @if (isset($_GET['title'])) value="{{ $_GET['title'] }}" @endif>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="email">توضیحات محصول</label>
+                                                        <input type="text" class="form-control"
+                                                               id="description" name="filter[description]"
+                                                               placeholder="توضیحات محصول"
+                                                               @if (isset($_GET['description'])) value="{{ $_GET['description'] }}" @endif>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-info">فیلتر</button>
+                                        <a href="{{route('admin_products.index')}}"></a>
+                                        <button type="button" class="btn btn-warning">
+                                            حذف فیلتر ها
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                            </div>
                             <table id="Data" class="table table-bordered table-striped table table-hover">
                                 <thead>
                                 <tr>

@@ -141,7 +141,7 @@
                                 <tbody>
                                 @foreach ($checks as $check)
                                     <tr>
-                                        <td>{{ $check->factor_id }}</td>
+                                        <td>{{ $check->order_id }}</td>
                                         <td>{{ $check->finally_price }}</td>
                                         <td>{{ $check->status}}</td>
                                         <td>

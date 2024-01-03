@@ -38,11 +38,53 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div id="accordion">
+                                <form role="form" method="get" action="{{route('customer_orders.filter')}}">
+                                    @csrf
+                                    <div class="card">
+                                        <div class="card-header bg-light">
+                                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
+                                                فیلتر ها
+                                            </a>
+                                        </div>
+                                        <div class="collapse" id="fillters" data-bs-parent="#accordionHead">
+                                            <div class="card-body">
+                                                <div class="form-control">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label for="email">نام سفارش</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="title" name="filter[title]"
+                                                                       placeholder="نام سفارش"
+                                                                       @if (isset($_GET['title'])) value="{{ $_GET['title'] }}" @endif>
+                                                            </div>
+                                                            <div class="col">
+                                                                <label for="email">قیمت کل</label>
+                                                                <input type="text" class="form-control"
+                                                                       id="description" name="filter[total_price]"
+                                                                       placeholder="قیمت کل"
+                                                                       @if (isset($_GET['total_price'])) value="{{ $_GET['total_price'] }}" @endif>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-info">فیلتر</button>
+                                                <a href="{{route('customer_orders.index')}}"></a>
+                                                <button type="button" class="btn btn-warning">
+                                                    حذف فیلتر ها
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="container">
                                 <table id="Data" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>اسم سفارش</th>
                                         <th>مشتری</th>
                                         <th>لیست محصولات</th>
@@ -56,7 +98,6 @@
                                     @php($temp = 0)
                                     @foreach ($orders as $order)
                                         <tr>
-                                            <td>{{$order->id}}</td>
                                             <td>{{$order->title}}</td>
                                             <td>
                                                 <a class="btn" data-bs-toggle="collapse"
@@ -98,29 +139,40 @@
                                                 </div>
                                             </td>
                                             <td>{{ $order->total_price }}</td>
+
                                             <td>
-                                                <form class="" action="{{route('customer_orders.edit',['id'=>$order->id])}}"
+                                                <form class=""
+                                                      action="{{route('customer_orders.edit',['id'=>$order->id])}}"
                                                       method="get">
-                                                    <button type="submit">
-                                                        <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                    </button>
+                                                    @if(is_null($order->factor))
+                                                        <button type="submit">
+                                                            <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                        </button>
+                                                    @endif
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('customer_orders.destroy',['id'=>$order->id])}}"
+                                                <form class=""
+                                                      action="{{route('customer_orders.destroy',['id'=>$order->id])}}"
                                                       method="post">
                                                     @csrf
-                                                    <button type="submit" onclick="return confirm('Are you sure?')">
-                                                        <i class="fa-regular fa-trash-can"></i>
-                                                    </button>
+                                                    @if(is_null($order->factor))
+                                                        <button type="submit" onclick="return confirm('Are you sure?')">
+                                                            <i class="fa-regular fa-trash-can"></i>
+                                                        </button>
+                                                    @endif
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('customer_factors.create',['id'=>$order->id])}}"
+                                                <form class=""
+                                                      action="{{route('customer_factors.create',['id'=>$order->id])}}"
                                                       method="get">
-                                                    <button type="submit">
-                                                        <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                    </button>
+
+                                                    @if(is_null($order->factor))
+                                                        <button type="submit">
+                                                            <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                        </button>
+                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>
@@ -128,9 +180,8 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
+                                        <th>اسم سفارش</th>
                                         <th>مشتری</th>
-                                        <th>فروشنده</th>
-                                        <th>توضیحات</th>
                                         <th>لیست محصولات</th>
                                         <th>قیمت کل</th>
                                         <th>ویرایش</th>

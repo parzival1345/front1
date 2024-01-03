@@ -6,14 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class SellerProductController extends Controller
 {
+    public function filter() {
+        $products = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::exact('title')->ignore(null),
+                AllowedFilter::exact('description')->ignore(null),
+            ])
+            ->get();
+        return view('Seller.SellerProduct.SellerProductsData', ['products' => $products]);
+    }
     public function index()
     {
         $id = auth()->user()->id;
-        $products = Product::where('user_id',$id)->get();
-        return view('Seller.products.productsData', ['products' => $products]);
+        $products = Product::where('user_id' , $id)->get();
+        return view('Seller.SellerProducts.SellerProductsData', ['products' => $products]);
     }
 
     /**
@@ -23,8 +34,7 @@ class SellerProductController extends Controller
     {
         $id = auth()->user()->id;
         $user = User::find($id);
-//        $categories = Category::all();
-        return view('Seller.products.addProduct',['user' => $user]);
+        return view('Seller.SellerProducts.AddSellerProducts',['user' => $user]);
     }
 
     /**
@@ -32,15 +42,13 @@ class SellerProductController extends Controller
      */
     public function store(Request $request)
     {
+
         Product::create([
             'user_id' => $request->seller,
-            'category_id' =>$request->category,
-            'title' => $request->title,
+            'title' => $request->product_name,
             'price' => $request->price,
-            'inventory' => $request->inventory,
-            'sold_number' => $request->sold_number,
-            'discription' => $request->discription,
-            'image_address' =>$request->image_address,
+            'inventory' => $request->amount_available,
+            'description' => $request->explanation,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -53,7 +61,7 @@ class SellerProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        return view('Seller.products.showproduct',['product'=>$product]);
+        return view('Seller.SellerProducts.showproduct',['product'=>$product]);
     }
 
     /**
@@ -61,9 +69,9 @@ class SellerProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::where('id',$id)->get()->first();
+        $products = Product::where('id',$id)->get()->first();
 
-        return view('Seller.products.editProductMenue',['product'=> $product]);
+        return view('Seller.SellerProducts.EditSellerProducts',['products'=> $products]);
     }
 
     /**
@@ -72,11 +80,10 @@ class SellerProductController extends Controller
     public function update(Request $request, string $id)
     {
         Product::where('id', $id)->update([
-            'title' => $request->title,
+            'title' => $request->product_name,
             'price' => $request->price,
-            'inventory' => $request->inventory,
-            'sold_number' => $request->sold_number,
-            'discription' => $request->discription,
+            'inventory' => $request->amount_available,
+            'description' => $request->explanation,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
         return redirect('/seller/products');

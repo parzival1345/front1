@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('workplace')}}" class="nav-link">خانه</a>
+            <a href="{{route(auth()->user()->role .".workplace")}}" class="nav-link">خانه</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">تماس</a>

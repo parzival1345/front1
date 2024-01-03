@@ -6,13 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
-use http\Env\Request;
+use App\Models\User;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+use CodeIgniter\Database\OCI8\Builder;
+
 
 class AdminProductController extends Controller
 {
-    public function index() {
-        $products = Product::all();
+    public function filter()
+    {
+        $products = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::exact('title')->ignore(null),
+                AllowedFilter::exact('description')->ignore(null),
+            ])
+            ->get();
         return view('Admin.MainProducts.productsData', ['products' => $products]);
+    }
+    public function index() {
+        $role = auth()->user()->role;
+        $products = Product::all();
+        return view('Admin.MainProducts.productsData', ['products' => $products , 'role' => $role]);
     }
 
     public function create() {

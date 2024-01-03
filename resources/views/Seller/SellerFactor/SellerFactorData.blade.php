@@ -36,97 +36,97 @@
                     <div class="card">
                         <div class="card-body">
                             <div id="accordionHead">
-                                <form role="form" method="get" action="{{ route('factors.index') }}">
-                                    <div class="card">
-                                        <div class="card-header bg-light">
-                                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
-                                                فیلتر ها
-                                            </a>
-                                        </div>
-                                        <div class="collapse" id="fillters" data-bs-parent="#accordionHead">
-                                            <div class="card-body">
-                                                <div class="form-control">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label for="filterOrderId ">شماره سفارش</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="filterOrderId"
-                                                                       name="filterOrderId" placeholder="شماره سفارش"
-                                                                       @if(isset($_GET['filterOrderId']))
-                                                                           value="{{$_GET['filterOrderId']}}"
-                                                                    @endif>
-                                                            </div>
-                                                            <div class="col">
-                                                                <label for="filterLastName">نام محصول</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="filterLastName"
-                                                                       name="filterLastName"
-                                                                       placeholder="نام محصول "
-                                                                       @if(isset($_GET['filterLastName']))
-                                                                           value="{{$_GET['filterLastName']}}"
-                                                                    @endif>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
+{{--                                <form role="form" method="get" action="{{ route('factors.index') }}">--}}
+{{--                                    <div class="card">--}}
+{{--                                        <div class="card-header bg-light">--}}
+{{--                                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">--}}
+{{--                                                فیلتر ها--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="collapse" id="fillters" data-bs-parent="#accordionHead">--}}
+{{--                                            <div class="card-body">--}}
+{{--                                                <div class="form-control">--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="row">--}}
+{{--                                                            <div class="col">--}}
+{{--                                                                <label for="filterOrderId ">شماره سفارش</label>--}}
+{{--                                                                <input type="text" class="form-control"--}}
+{{--                                                                       id="filterOrderId"--}}
+{{--                                                                       name="filterOrderId" placeholder="شماره سفارش"--}}
+{{--                                                                       @if(isset($_GET['filterOrderId']))--}}
+{{--                                                                           value="{{$_GET['filterOrderId']}}"--}}
+{{--                                                                    @endif>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col">--}}
+{{--                                                                <label for="filterLastName">نام محصول</label>--}}
+{{--                                                                <input type="text" class="form-control"--}}
+{{--                                                                       id="filterLastName"--}}
+{{--                                                                       name="filterLastName"--}}
+{{--                                                                       placeholder="نام محصول "--}}
+{{--                                                                       @if(isset($_GET['filterLastName']))--}}
+{{--                                                                           value="{{$_GET['filterLastName']}}"--}}
+{{--                                                                    @endif>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="row">--}}
+{{--                                                            <div class="col">--}}
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label for="filterUserName">نام کاربری</label>
-                                                                <input type="text" class="form-control"
-                                                                       id="filterUserName"
-                                                                       name="filterUserName"
-                                                                       placeholder="نام کاربری"
-                                                                       @if(isset($_GET['filterUserName']))
-                                                                           value="{{$_GET['filterUserName']}}"
-                                                                    @endif>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="row">
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="row">--}}
+{{--                                                            <div class="col">--}}
+{{--                                                                <label for="filterUserName">نام کاربری</label>--}}
+{{--                                                                <input type="text" class="form-control"--}}
+{{--                                                                       id="filterUserName"--}}
+{{--                                                                       name="filterUserName"--}}
+{{--                                                                       placeholder="نام کاربری"--}}
+{{--                                                                       @if(isset($_GET['filterUserName']))--}}
+{{--                                                                           value="{{$_GET['filterUserName']}}"--}}
+{{--                                                                    @endif>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col">--}}
+{{--                                                                <div class="row">--}}
 
-                                                                    <div class="col">
-                                                                        <label for="filterOrderTotalPriceMin">قیمت</label>
-                                                                        <label for="filterOrderTotalPriceMin"
-                                                                               id="filterAge">از</label>
-                                                                        <input type="number" class="form-control"
-                                                                               id="filterOrderTotalPriceMin"
-                                                                               name="filterAgeMin"
-                                                                               placeholder="از"
-                                                                               @if(isset($_GET['filterOrderTotalPriceMin']))
-                                                                                   value="{{$_GET['filterOrderTotalPriceMin']}}"
-                                                                            @endif>
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="filterOrderTotalPriceMax">تا</label>
-                                                                        <input type="number" class="form-control"
-                                                                               id="filterOrderTotalPriceMax"
-                                                                               name="filterOrderTotalPriceMax"
-                                                                               placeholder="تا"
-                                                                               @if(isset($_GET['filterOrderTotalPriceMax']))
-                                                                                   value="{{$_GET['filterOrderTotalPriceMax']}}"
-                                                                            @endif>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-info">فیلتر</button>
-                                                <a href="{{ route('seller_factors.index') }}">
-                                                    <button type="button" class="btn btn-warning">حذف فیلتر ها</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+{{--                                                                    <div class="col">--}}
+{{--                                                                        <label for="filterOrderTotalPriceMin">قیمت</label>--}}
+{{--                                                                        <label for="filterOrderTotalPriceMin"--}}
+{{--                                                                               id="filterAge">از</label>--}}
+{{--                                                                        <input type="number" class="form-control"--}}
+{{--                                                                               id="filterOrderTotalPriceMin"--}}
+{{--                                                                               name="filterAgeMin"--}}
+{{--                                                                               placeholder="از"--}}
+{{--                                                                               @if(isset($_GET['filterOrderTotalPriceMin']))--}}
+{{--                                                                                   value="{{$_GET['filterOrderTotalPriceMin']}}"--}}
+{{--                                                                            @endif>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col">--}}
+{{--                                                                        <label for="filterOrderTotalPriceMax">تا</label>--}}
+{{--                                                                        <input type="number" class="form-control"--}}
+{{--                                                                               id="filterOrderTotalPriceMax"--}}
+{{--                                                                               name="filterOrderTotalPriceMax"--}}
+{{--                                                                               placeholder="تا"--}}
+{{--                                                                               @if(isset($_GET['filterOrderTotalPriceMax']))--}}
+{{--                                                                                   value="{{$_GET['filterOrderTotalPriceMax']}}"--}}
+{{--                                                                            @endif>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="card-footer">--}}
+{{--                                                <button type="submit" class="btn btn-info">فیلتر</button>--}}
+{{--                                                <a href="{{ route('seller_factors.index') }}">--}}
+{{--                                                    <button type="button" class="btn btn-warning">حذف فیلتر ها</button>--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
                             <table id="Data" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -139,9 +139,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($checks != null)
                                 @foreach ($checks as $check)
                                     <tr>
-                                        <td>{{ $check->factor_id }}</td>
+                                        <td>{{ $check->order_id }}</td>
                                         <td>{{ $check->finally_price }}</td>
                                         <td>{{ $check->status}}</td>
 {{--                                        <td>--}}
@@ -178,6 +179,7 @@
 {{--                                        </td>--}}
                                     </tr>
                                 @endforeach
+                                @endif
                                 </tbody>
 
                                 <tfoot>

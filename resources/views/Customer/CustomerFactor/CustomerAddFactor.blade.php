@@ -38,13 +38,16 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="order_id">اسم سفارش</label>
+                            <select class="form-control" id="user_id" name="user_id">
+                                <option value="{{Auth::user()->id}}">
+                                    username: {{Auth::user()->user_name}}
+                                </option>
+                            </select>
                             <select name="order_id" class="form-control" id="order_id" onchange="updateTotalPrice(this)">
-                                <option value="">انتخاب سفارش</option>
-                                @foreach($orders as $order)
-                                    <option value="{{$orders->id}}" data-total-price="{{ $orders->total_price }}">
-                                        {{ $orders->title }}
+
+                                    <option value="{{$order->id}}" data-total-price="{{ $order->total_price }}">
+                                        {{ $order->title }}
                                     </option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

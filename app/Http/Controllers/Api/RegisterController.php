@@ -24,15 +24,14 @@ class RegisterController extends Controller
             return view('authorize/register')->with('message' , 'لطفا منتظر تایید ادمین باشید');
         }else {
         try {
-            $user = User::create([
+            User::create([
                 'user_name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role,
                 'password' => Hash::make($request->password)
             ]);
-            session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
 
-            return redirect('/workplace');
+            return redirect('/login');
 
         } catch (\Throwable $th) {
             return response()->json([

@@ -141,16 +141,16 @@
                                 <tbody>
                                 @foreach ($checks as $check)
                                     <tr>
-                                        <td>{{ $checks->factor_id }}</td>
-                                        <td>{{ $checks->finally_price }}</td>
-                                        <td>{{ $checks->status}}</td>
+                                        <td>{{ $check->order_id }}</td>
+                                        <td>{{ $check->finally_price }}</td>
+                                        <td>{{ $check->status}}</td>
                                         <td>
 
-                                            <form action="{{route('customer_factors.edit',['id'=>$checks->id])}}">
+                                            <form action="{{route('customer_factors.edit',['id'=>$check->id])}}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit"
-                                                        @if($checks->status == 'پرداخت شده') disabled @endif>
+                                                        @if($check->status == 'پرداخت شده') disabled @endif>
 
                                                     <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                 </button>
@@ -159,7 +159,7 @@
 
                                         </td>
                                         <td>
-                                            <form action="{{route('customer_factors.destroy',['id'=>$checks->id])}}"
+                                            <form action="{{route('customer_factors.destroy',['id'=>$check->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')">
@@ -168,11 +168,11 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('customer_factors.update_status',['id'=>$checks->id])}}"
+                                            <form action="{{route('customer_factors.update_status',['id'=>$check->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"
-                                                       @if($checks ->status == 'پرداخت شده') disabled @endif>
+                                                       @if($check->status == 'پرداخت شده') disabled @endif>
                                                 {{--                                                {{dd($check)}}--}}
                                             </form>
                                         </td>

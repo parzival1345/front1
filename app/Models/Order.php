@@ -24,7 +24,7 @@ class Order extends Model
 
     public function factor()
     {
-        return $this->belongsTo(Factor::class);
+        return $this->hasOne(Factor::class);
     }
 
 }

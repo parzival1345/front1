@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('role',['admin' , 'customer' , 'seller'])->nullable();
-            $table->enum('status' , ['در انتظار تایید','تایید شده'])->nullable();
+
         });
     }
 

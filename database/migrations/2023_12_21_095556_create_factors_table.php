@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('factors', function (Blueprint $table) {
             $table->id();
-            $table->integer('factor_id');
             $table->bigInteger('finally_price');
 //            $table->string('notes');
 //            $table->enum('payment_method',['پرداخت درب منزل','پرداخت انلاین']);

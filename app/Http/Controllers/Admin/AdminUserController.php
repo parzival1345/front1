@@ -4,34 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use CodeIgniter\Database\OCI8\Builder;
+use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class AdminUserController extends Controller
 {
-    public function filter(Request $request) {
-        $users = User::all();
-        if ($request->filterEmail)
-            $users = $users->where('email', $request->filterEmail);
-        if ($request->filterFirstName)
-            $users = $users->where('first_name', $request->filterFirstName);
-        if ($request->filterLastName)
-            $users = $users->where('last_name', $request->filterLastName);
-        if ($request->filterUserName)
-            $users = $users->where('user_name', $request->filterUserName);
-        if ($request->filterAgeMin && $request->filterAgeMax)
-            $users = $users->whereBetween('age', [$request->filterAgeMin,$request->filterAgeMax]);
-        if ($request->filterPhoneNumber)
-            $users = $users->where('phone_number', $request->filterPhoneNumber);
-        if ($request->filterPostalCode)
-            $users = $users->where('post_code', $request->filterPostalCode);
-        if ($request->filterGender)
-            $users = $users->where('gender', $request->filterGender);
-        if ($request->filterStatus)
-            $users = $users->where('status', $request->filterStatus);
-        if ($request->filterRoles)
-            $users = $users->where('role', $request->filterRoles);
+    public function filter()
+    {
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::callback('AgeMin', function(Builder $query, $value){
+                    $query->where('age', '>=', (int)$value);
+                })->ignore(null),
+                AllowedFilter::callback('AgeMax', function($query, $value){
+                    $query->where('age', '<=', (int)$value);
 
-        return view('Admin.MainUsers.userData', compact('users'));
+                })->ignore(null),
+                AllowedFilter::exact('email')->ignore(null),
+                AllowedFilter::exact('user_name')->ignore(null),
+                AllowedFilter::exact('first_name')->ignore(null),
+                AllowedFilter::exact('last_name')->ignore(null),
+                AllowedFilter::exact('gender')->ignore(null),
+                AllowedFilter::exact('phone_number')->ignore(null),
+                AllowedFilter::exact('post_code')->ignore(null),
+            ])
+            ->get();
+        return view('Admin.MainUsers.userData', ['users' => $users]);
     }
     public function index()
     {

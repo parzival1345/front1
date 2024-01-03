@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,8 +45,8 @@
                             <div class="icon">
                                 <ion-icon name="people-outline"></ion-icon>
                             </div>
-                            <a href="{{route('users.index')}}" class="small-box-footer">اطلاعات بیشتر <i
-                                    class="fa fa-arrow-circle-left"></i></a>
+{{--                            <a href="{{route('users.index')}}" class="small-box-footer">اطلاعات بیشتر <i--}}
+{{--                                    class="fa fa-arrow-circle-left"></i></a>--}}
                         </div>
                     </div>
                     <!-- ./col -->
@@ -61,8 +60,8 @@
                             <div class="icon">
                                 <ion-icon name="receipt-outline"></ion-icon>
                             </div>
-                            <a href="{{route('factors.index')}}" class="small-box-footer">اطلاعات بیشتر <i
-                                    class="fa fa-arrow-circle-left"></i></a>
+{{--                            <a href="{{route('factors.index')}}" class="small-box-footer">اطلاعات بیشتر <i--}}
+{{--                                    class="fa fa-arrow-circle-left"></i></a>--}}
                         </div>
                     </div>
                     <!-- ./col -->
@@ -76,8 +75,8 @@
                             <div class="icon">
                                 <i class="fa-solid fa-cart-arrow-down fa-flip-horizontal"></i>
                             </div>
-                            <a href="{{route('orders.index')}}" class="small-box-footer">اطلاعات بیشتر <i
-                                    class="fa fa-arrow-circle-left"></i></a>
+{{--                            <a href="{{route('orders.index')}}" class="small-box-footer">اطلاعات بیشتر <i--}}
+{{--                                    class="fa fa-arrow-circle-left"></i></a>--}}
                         </div>
                     </div>
                     <!-- ./col -->
@@ -91,8 +90,8 @@
                             <div class="icon">
                                 <i class="fa-solid fa-tags fa-flip-horizontal"></i>
                             </div>
-                            <a href="{{route('products.index')}}" class="small-box-footer">اطلاعات بیشتر <i
-                                    class="fa fa-arrow-circle-left"></i></a>
+{{--                            <a href="{{route('products.index')}}" class="small-box-footer">اطلاعات بیشتر <i--}}
+{{--                                    class="fa fa-arrow-circle-left"></i></a>--}}
                         </div>
                     </div>
                     <!-- ./col -->

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SellerWaiting
+class Seller_Waiting
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class SellerWaiting
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->status == "در حال انتظار"){
+
+        if (auth()->user()->role == 'seller' && auth()->user()->status == 'تایید شده') {
             return $next($request);
         }
-
-        return redirect("/login");
+        return  redirect()->back();
     }
 }

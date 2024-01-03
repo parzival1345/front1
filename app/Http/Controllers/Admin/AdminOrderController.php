@@ -10,9 +10,20 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminOrderController extends Controller
 {
+    public function filter() {
+        $products = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::exact('title')->ignore(null),
+                AllowedFilter::exact('total_price')->ignore(null),
+            ])
+            ->get();
+        return view('Admin.MainProducts.productsData', ['products' => $products]);
+    }
     public function index() {
         $orders = Order::all();
         return view('Admin.MainOrders.ordersData', ['orders' => $orders]);

@@ -1,4 +1,4 @@
-<a href="{{route('workplace')}}" class="brand-link">
+<a href="{{route(auth()->user()->role .".workplace")}}" class="brand-link">
     <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
          class="brand-image img-circle elevation-3"
          style="opacity: .8">

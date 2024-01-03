@@ -6,7 +6,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="#" class="nav-link user-panel mt-3 pb-3 mb-3 info">
-                        3A پروفایل
+                        {{auth()->user()->user_name}}
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
@@ -122,6 +122,14 @@
                                 </a>
                             </li>
                             @endif
+                            @if(auth()->user()->role == 'seller')
+                                <li class="nav-item">
+                                    <a href="{{route('seller_factors.index')}}" class="nav-link">
+                                        <i class="fas fa-list nav-icon"></i>
+                                        <p>لیست فاکتورها</p>
+                                    </a>
+                                </li>
+                            @endif
                     </ul>
                 </li>
                 @if(auth()->user()->role == 'admin' || auth()->user()->role == 'seller')
@@ -144,7 +152,7 @@
                         @endif
                         @if(auth()->user()->role == 'seller')
                             <li class="nav-item">
-                                <a href="{{route('admin_products.create')}}" class="nav-link">
+                                <a href="{{route('seller_products.create')}}" class="nav-link">
                                     <i class="fas fa-plus nav-icon"></i>
                                     <p> محصول جدید</p>
                                 </a>
@@ -160,7 +168,7 @@
                             @endif
                             @if(auth()->user()->role == 'seller')
                             <li class="nav-item">
-                                <a href="{{route('seller_factors.index')}}" class="nav-link">
+                                <a href="{{route('seller_products.index')}}" class="nav-link">
                                     <i class="fas fa-list nav-icon"></i>
                                     <p>لیست محصولات</p>
                                 </a>
@@ -214,29 +222,7 @@
                     </ul>
                 </li>
                 @endif
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-cash-register nav-icon"></i>
-                        <p>
-                            فرصت های فروش
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-{{--                            <a href="{{route('addOpportunity')}}" class="nav-link">--}}
-{{--                                <i class="fas fa-plus nav-icon"></i>--}}
-{{--                                <p>ثبت فرصت جدید</p>--}}
-{{--                            </a>--}}
-                        </li>
-                        <li class="nav-item">
-{{--                            <a href="{{route('opportunities_data')}}" class="nav-link">--}}
-{{--                                <i class="fas fa-list nav-icon"></i>--}}
-{{--                                <p> لیست فرصتها</p>--}}
-{{--                            </a>--}}
-                        </li>
-                    </ul>
-                </li>
+
             </ul>
         </nav>
 

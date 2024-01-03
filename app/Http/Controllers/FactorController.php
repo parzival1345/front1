@@ -33,7 +33,7 @@ class FactorController extends Controller
     public function store(Request $request)
     {
         Factor::create([
-            'factor_id' => $request->order_id,
+            'order_id' => $request->order_id,
             'finally_price' => $request->total_pay,
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
@@ -55,7 +55,7 @@ class FactorController extends Controller
     public function update(Request $request, string $id)
     {
         Factor::find($id)->update([
-            'factor_id' => $request->order_id,
+            'order_id' => $request->order_id,
             'finally_price' => $request->total_pay,
             'status' => $request->status,
         ]);

@@ -33,8 +33,20 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
+                <form role="form" method="post" action="{{route('seller_products.store')}}" enctype="multipart/form-data">
                     @csrf
+                    <div class="card-body">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <lable for="seller">فروشنده</lable>
+                            <select name="seller" class="from-control">
+                                <option value="{{$user->id}}">
+                                    {{$user->user_name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="product_name">نام محصول</label>

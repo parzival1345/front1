@@ -8,9 +8,20 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+
 
 class CustomerOrderController extends Controller
 {
+    public function filter() {
+        $products = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::exact('title')->ignore(null),
+                AllowedFilter::exact('total_price')->ignore(null),
+            ])
+            ->get();
+        return view('Customer.CustomerOrders.CustomerDataOrders', ['products' => $products]);}
     public function index()
     {
         $id = auth()->user()->id;
@@ -68,20 +79,6 @@ class CustomerOrderController extends Controller
 
         return redirect('/customer/orders');
     }
-
-    /**
-     * Display the specified resource.
-     */
-//    public function show(string $id)
-//    {
-//        $order = Order::find($id);
-//        $product = $order->products()->first();
-//        return view("Buyer.orders.showorder",['order'=>$order,'product'=>$product]);
-//    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $order = Order::find($id);

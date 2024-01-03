@@ -6,7 +6,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item"><a href="{{route('workplace')}}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{{route(auth()->user()->role.'.workplace')}}">خانه</a></li>
                     <li class="breadcrumb-item active">فاکتور جدید</li>
                 </ol>
             </div><!-- /.col -->

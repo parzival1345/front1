@@ -2,13 +2,10 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Admin;
-use App\Http\Middleware\Customer;
 use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Middleware\OneMiddleware;
-use App\Http\Middleware\Seller;
+use App\Http\Middleware\Seller_Waiting;
 use App\Http\Middleware\SellerMiddleware;
-use App\Http\Middleware\SellerWaiting;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -28,6 +25,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+//        Seller_Waiting::class
     ];
 
     /**
@@ -72,8 +70,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'Admin_role' => OneMiddleware::class,
-        'sellerwaiting' => SellerWaiting::class,
         'Customer_role' => CustomerMiddleware::class,
         'Seller_role' => SellerMiddleware::class,
+        'Seller_Waiting' => Seller_Waiting::class,
     ];
 }

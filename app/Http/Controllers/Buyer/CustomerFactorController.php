@@ -12,27 +12,27 @@ class CustomerFactorController extends Controller
     public function index()
     {
         $id = auth()->user()->id;
-        $checks = Factor::find($id);
-//        dd($checks);
+//        dd($id);
+        $checks = Factor::where('id' , $id)->get();
         return view('Customer/CustomerFactor/CustomerDataFactor', ['checks' => $checks]);
     }
-    public function create(){
-        $id = auth()->user()->id;
-        $orders = Order::find($id);
-        return view('Customer/CustomerFactor/CustomerAddFactor' , ['orders' => $orders]);
+    public function create($id){
+        $order = Order::where('id' , $id)->first();
+        return view('Customer/CustomerFactor/CustomerAddFactor' , ['order' => $order]);
     }
     public function store(Request $request)
     {
         Factor::create([
-            'factor_id' => $request->order_id,
+            'user_id' => $request->user_id,
+            'order_id' => $request->order_id,
             'finally_price' => $request->total_pay,
             'created_at'=>date('Y-m-d H:i:s'),
         ]);
-        return redirect('/customer/factor');
+        return redirect('/customer/factors');
     }
     public function update_status($id) {
         $status = Factor::findOrfail($id);
         $status->update(['status' => 'پرداخت شده']);
-        return redirect('/customer/factor');
+        return redirect('/customer/factors');
     }
 }
